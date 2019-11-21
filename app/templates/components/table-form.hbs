@@ -2,7 +2,9 @@
         <div class="element-header__cell element-header__cell_day">
             {{toUpperCase day.rus}}
         </div>
-        <div class="element-header__cell element-header__cell_data" id='{{day.en}}'></div>
+        <div class="element-header__cell element-header__cell_data" id='{{day.en}}'>
+            {{getDateString day.index}}
+        </div>
         <div class="element-header__cell element-header__cell_total-tasks">
             Всего задач: <span id='total-tasks' class="element-header__cell-content"></span>
         </div>
@@ -16,7 +18,7 @@
                 Детали задачи
             </th>
         </tr>
-        {{#each times as |time|}}
-            {{table-row time=time day=day.en}}
+        {{#each hours as |hour|}}
+            {{table-row hour=hour day=day.en}}
         {{/each}}        
     </table>
