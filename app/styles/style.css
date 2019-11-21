@@ -40,9 +40,6 @@
 
     background: rgb(205, 227, 249);
 }
-.form-body__element:last-child {
-    margin-bottom: 0;
-}
 .form-body__element_last {
     background: rgb(221, 221, 221);
     color: rgb(68, 68, 68);

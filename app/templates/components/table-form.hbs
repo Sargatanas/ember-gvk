@@ -1,15 +1,23 @@
-<div class="element-header">
+<div class="form-body__element">
+    <div class="element-header">
         <div class="element-header__cell element-header__cell_day">
             {{toUpperCase day.rus}}
         </div>
         <div class="element-header__cell element-header__cell_data" id='{{day.en}}'>
-            {{getDateString day.index}}
+            {{getDateString day.id date.value}}
         </div>
         <div class="element-header__cell element-header__cell_total-tasks">
-            Всего задач: <span id='total-tasks' class="element-header__cell-content"></span>
+            Всего задач: 
+            <span 
+                id='total-tasks-{{day.en}}' 
+                class="element-header__cell-content">
+                0
+            </span>
         </div>
     </div>
-    <table class="element-body" id="table-content">
+    <table 
+        class="element-body" 
+        id="table-content">
         <tr class="element-body__row">
             <th class="element-body__cell">
                 Время
@@ -22,3 +30,4 @@
             {{table-row hour=hour day=day.en}}
         {{/each}}        
     </table>
+</div>

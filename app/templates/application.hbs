@@ -8,26 +8,33 @@
                 name="id" 
                 value="1">
         </label>
-  
+        
         <label 
             class="form-header__element" 
-            for="data">
+            for="add-date">
                 Дата (в формате ДД.ММ.ГГГГ):
                 <input 
                     type="date" 
                     id="add-date" 
-                    name="id">
+                    name="id"
+                    value={{getFormDate date.value}}>
         </label>
             
-        <button class="form-header__element form-header__element_button" id="button">
-            Показать
+        <button 
+            class="form-header__element form-header__element_button" 
+            id="button"
+            onclick={{action "showTable"}}>
+                Показать
         </button>
     </header>
-
-    <main class="form-body" id="table">
-        {{#each week as |day|}}
-            {{table-form hours=hours day=day}}
-        {{/each}}
-        
+   <main 
+        class="form-body" 
+        id="table">
+            {{outlet}}  
+            {{#if isShow}}
+                {{#each week as |day|}}
+                    {{table-form hours=hours day=day date=date status=status}}
+                {{/each}}
+            {{/if}}                  
     </main>
 </div>

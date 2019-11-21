@@ -1,5 +1,5 @@
 export function getDateString(params) {
-    let date = getDate(params[0]);
+    let date = getDate(params[0], params[1]);
 
     let fullDate = date.getDate() <= 9 ? '0' + date.getDate() : date.getDate();
     fullDate += '.';
@@ -10,8 +10,8 @@ export function getDateString(params) {
     return fullDate;
 };
 
-function getDate(index) {
-    let currentDate = new Date();
+function getDate(index, date) {
+    let currentDate = date;
 
     currentDate.setHours(0);
     currentDate.setMinutes(0);
