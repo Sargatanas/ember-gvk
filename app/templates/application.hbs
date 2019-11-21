@@ -1,3 +1,33 @@
-<h2 id="title">Welcome to Ember</h2>
+<div class="form">
+    <header class="form-header">
+        <label class="form-header__element" for="team-id">
+            Номер бригады:
+            <input 
+                type="number" 
+                id="add-team-id" 
+                name="id" 
+                value="1">
+        </label>
+  
+        <label 
+            class="form-header__element" 
+            for="data">
+                Дата (в формате ДД.ММ.ГГГГ):
+                <input 
+                    type="date" 
+                    id="add-date" 
+                    name="id">
+        </label>
+            
+        <button class="form-header__element form-header__element_button" id="button">
+            Показать
+        </button>
+    </header>
 
-{{outlet}}
+    <main class="form-body" id="table">
+        {{#each week as |day|}}
+            {{table-form times=times day=day}}
+        {{/each}}
+        
+    </main>
+</div>
