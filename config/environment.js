@@ -10,7 +10,13 @@ module.exports = function(environment) {
       FEATURES: {
         // Here you can enable experimental features on an ember canary build
         // e.g. 'with-controller': true
-      }
+      },
+      EXTEND_PROTOTYPES: {
+        Array: true,
+        Date: false,
+        Function: true,
+        String: true
+      }  
     },
 
     APP: {
