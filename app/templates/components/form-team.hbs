@@ -1,0 +1,18 @@
+<h2>Список бригад</h2>
+
+{{#each teams as |team|}}
+  <div class="element-body-task" style="position: static">
+    <div class="element-body-task-detail">
+      <span class="element-body-task-detail__header">№ бригады:</span>
+      {{team.index}}
+    </div>
+    <div class="element-body-task-detail">
+      <span class="element-body-task-detail__header">Начало смены:</span>
+      {{team.timeStart}}
+    </div>
+    <div class="element-body-task-detail">
+      <span class="element-body-task-detail__header">Окончаение смены:</span>
+      {{team.timeEnd}}
+    </div> 
+  </div>
+{{/each}}  
