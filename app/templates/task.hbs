@@ -1,20 +1,25 @@
-
-{{log model}}
-{{#each model.data as |task|}}
-  <div class="element-body-task" id="task" style="position: static"> 
+{{#each model as |task|}}
+  <div class="element-body-task" style="position: static">
+    <div class="element-body-task-detail">
+      <span class="element-body-task-detail__header">№ заявки:</span>
+      {{task.index}}
+    </div> 
     <ol class="element-body-task-detail" id="details">
       <li class="element-body-task-detail__header" value="0">Задачи:</li>
-        {{#each task.attributes.targets as |target|}}
-          {{log target}}
+        {{#each task.targets as |target|}}
           <li class="element-body-task-detail__element">
              {{target}}
           </li>
         {{/each}}
     </ol>
-    <div class="element-body-task-detail" id="adress">
+    <div class="element-body-task-detail">
       <span class="element-body-task-detail__header">Адрес:</span>
-      {{task.attributes.adress}}
+      {{task.fullAdress}}
     </div>
+    <div class="element-body-task-detail">
+      <span class="element-body-task-detail__header">Плановая длительность: </span>
+      {{task.planeTime}}
+    </div> 
   </div>
 {{/each}}    
 

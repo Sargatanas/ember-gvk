@@ -7,43 +7,45 @@
                 "index": 1,
                 "importance" : 2,
                 "adress": {
-                    "street": "Пушкина",
-                    "house": 44,
-                    "building": "",
-                    "flat": 15
+                  "street": "Пушкина",
+                  "house": 44,
+                  "building": "",
+                  "flat": 15
                 },
                 "targets": [
                     "задание 1",
                     "задание 2",
                     "задание 3"
                 ],
-                "planDuration":{
+                "planeDuration": {
                     "hours": 2,
-                    "minutes": 15 
-                  }
-            }
+                    "minutes": 15
+                }                
+            },
+            "relationships": {}
         },
         {
-            "id": 1,
+            "id": 2,
             "type": "task",
             "attributes": {
                 "index": 3,
                 "importance" : 1,
                 "adress": {
-                    "street": "Пушкина",
-                    "house": 12,
-                    "building": "1",
-                    "flat": 4
-                },
+                  "street": "Пушкина",
+                  "house": 12,
+                  "building": "1",
+                  "flat": ""
+                },                
                 "targets": [
                     "задание 1",
                     "задание 4"
                 ],
-                "planDuration":{
+                "planeDuration": {
                     "hours": 1,
                     "minutes": 0 
-                  }
-            }
+                }                
+            },
+            "relationships": {}
         }
     ]
   }
