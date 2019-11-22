@@ -1,0 +1,20 @@
+
+{{log model}}
+{{#each model.data as |task|}}
+  <div class="element-body-task" id="task" style="position: static"> 
+    <ol class="element-body-task-detail" id="details">
+      <li class="element-body-task-detail__header" value="0">Задачи:</li>
+        {{#each task.attributes.targets as |target|}}
+          {{log target}}
+          <li class="element-body-task-detail__element">
+             {{target}}
+          </li>
+        {{/each}}
+    </ol>
+    <div class="element-body-task-detail" id="adress">
+      <span class="element-body-task-detail__header">Адрес:</span>
+      {{task.attributes.adress}}
+    </div>
+  </div>
+{{/each}}    
+
