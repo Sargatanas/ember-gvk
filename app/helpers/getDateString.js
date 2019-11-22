@@ -11,7 +11,8 @@ export function getDateString(params) {
 };
 
 function getDate(index, date) {
-    let currentDate = date;
+    let currentDate = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
+    currentDate = new Date(currentDate);
 
     currentDate.setHours(0);
     currentDate.setMinutes(0);
@@ -24,7 +25,7 @@ function getDate(index, date) {
     let dateShift = index - currentDay;
     
     currentDate.setDate(currentDate.getDate() + dateShift);
-
+       
     return currentDate;
 };
 
