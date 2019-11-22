@@ -1,10 +1,27 @@
+<h2>Список заявок</h2>
 
-
-<div class="element-body-task" id="task"> 
+{{log model}}
+{{#each model as |task|}}
+  <div class="element-body-task" style="position: static">
+    <div class="element-body-task-detail">
+      <span class="element-body-task-detail__header">№ заявки:</span>
+      {{task.index}}
+    </div> 
     <ol class="element-body-task-detail" id="details">
-        <li class="element-body-task-detail__header" value="0">Задачи:</li>
+      <li class="element-body-task-detail__header" value="0">Задачи:</li>
+        {{#each task.targets as |target|}}
+          <li class="element-body-task-detail__element">
+             {{target}}
+          </li>
+        {{/each}}
     </ol>
-    <div class="element-body-task-detail" id="adress">
-        <span class="element-body-task-detail__header">Адрес:</span>
+    <div class="element-body-task-detail">
+      <span class="element-body-task-detail__header">Адрес:</span>
+      {{task.fullAdress}}
     </div>
-</div>
+    <div class="element-body-task-detail">
+      <span class="element-body-task-detail__header">Предварительная длительность работ: </span>
+      {{task.planeTime}}
+    </div> 
+  </div>
+{{/each}}   

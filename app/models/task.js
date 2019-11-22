@@ -36,6 +36,6 @@ export default DS.Model.extend({
     let minutes = this.get('planeDuration').minutes;
     minutes = minutes < 10 ? '0' + minutes: minutes;
 
-    return `${this.get('planeDuration').hours}:${minutes}`;
+    return `${this.get('planeDuration').hours} ч ${minutes} мин`;
   }),
 });
