@@ -39,7 +39,10 @@
     </main>
 
     <footer>
-        {{form-task tasks=tasks}}
+        <h2>Список заявок</h2>
+        {{form-task comment='Это из общего списка' tasks=tasks}}
+
+        <h2>Список бригад</h2>
         {{form-team teams=teams}}
     </footer>
 </div>

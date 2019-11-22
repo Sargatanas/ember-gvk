@@ -24,4 +24,6 @@ export default DS.Model.extend({
 
     return `${this.get('shiftEnd').hours}:${minutes}`;
   }),
+
+  tasks: DS.hasMany('task')
 });
