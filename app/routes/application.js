@@ -12,5 +12,8 @@ export default Ember.Route.extend({
         this._super(...arguments);
         Ember.set(controller, 'tasks', model.tasks);
         Ember.set(controller, 'teams', model.teams);
-      }
+      },
+
+    dateStart: '',
+    dateEnd: ''  
 });

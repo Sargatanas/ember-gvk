@@ -6,7 +6,7 @@
                 type="number" 
                 id="add-team-id" 
                 name="id" 
-                value="1">
+                value="101">
         </label>
         
         <label 
@@ -30,12 +30,16 @@
    <main 
         class="form-body" 
         id="table">
-            {{outlet}}  
+            {{#if isShowTeam}}
+                {{form-team teams=teams}}
+            {{/if}} 
+            {{outlet}} 
+            <br><br> 
             {{#if isShow}}
                 {{#each week as |day|}}
                     {{table-form hours=hours day=day date=date status=status}}
                 {{/each}}
-            {{/if}}                  
+            {{/if}}                 
     </main>
 
     <footer>

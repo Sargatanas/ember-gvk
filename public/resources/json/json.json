@@ -1,5 +1,5 @@
-{ "tasks" : {
-    "data": [{
+{
+    "tasks": [{
         "id": 1,
         "type": "task",
         "attributes": {
@@ -51,9 +51,8 @@
             }                
         },
         "relationships": {}
-    }]},
-  "teams": {
-    "data": [{
+    }],
+    "teams": [{
         "id": 1,
         "type": "team",
         "attributes": {
@@ -90,17 +89,5 @@
             }                                               
         },
         "relationships": {}
-    }],
-    "included": [{
-        "id": 1,
-        "type": "task",
-        "attributes": {
-            "timeStart": {
-                "hours": 9,
-                "minutes": 0
-            },
-            "date": "2019-11-20" 
-            }
-       }]
-    }
+    }]
 }

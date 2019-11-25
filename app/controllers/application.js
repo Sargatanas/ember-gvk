@@ -40,6 +40,8 @@ export default Ember.Controller.extend({
         }
     ],
     isShow: false,
+    isShowTeam: false,
+    output: '',
     date: {
         id: new Date().getDay() - 1,
         value: new Date(),
@@ -65,7 +67,17 @@ export default Ember.Controller.extend({
                     currentDate: this.date.value,                
                 });
             }
-        }
+
+            let teamIndex = document.getElementById('add-team-id').value;
+            let context = this;
+
+            let team = this.store.findAll('team').filterBy('index', 101); 
+            console.log(team);
+            context.setProperties({
+                isShowTeam: true,
+                output: team
+            });     
+        },
     }
 });
 
