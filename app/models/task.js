@@ -38,4 +38,6 @@ export default DS.Model.extend({
 
     return `${this.get('planeDuration').hours} ч ${minutes} мин`;
   }),
+
+  team: DS.belongsTo('team', {async: true})
 });

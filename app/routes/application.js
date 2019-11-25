@@ -1,10 +1,6 @@
 import Ember from 'ember';
 
 export default Ember.Route.extend({
-    /* model() {
-        return this.store.findAll('task');
-    } */
-
     model() {
         return Ember.RSVP.hash({
           tasks: this.store.findAll('task'),

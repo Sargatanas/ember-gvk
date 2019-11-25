@@ -23,10 +23,12 @@
                 }                
             },
             "relationships": {
-                "data": {
-                    "id": "1",
-                    "type": "team"
-                }
+                "team": {
+                    "data": {
+                        "id": "1",
+                        "type": "team"
+                    }
+                }                
             }
         },
         {
@@ -71,19 +73,21 @@
                 }                                          
             },
             "relationships": {
-                "data": [
-                    {
-                        "id": "1",
-                        "type": "task",
-                        "attributes": {
-                            "timeStart": {
-                                "hours": 9,
-                                "minutes": 0
-                            },
-                            "date": "2019-11-20"
+                "task": {
+                    "data": [
+                        {
+                            "id": "1",
+                            "type": "task",
+                            "attributes": {
+                                "timeStart": {
+                                    "hours": 9,
+                                    "minutes": 0
+                                },
+                                "date": "2019-11-20"
+                            }
                         }
-                    }
-                ]
+                    ]
+                }                
             }
         },
         {

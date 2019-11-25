@@ -14,6 +14,12 @@
     </div> 
 
     <h3>Заявки закрепленные за бригадой</h3>
-    {{form-task  comment='Это от бригады' tasks=team.tasks}}
+    {{#if team.tasks}}
+      {{form-task  comment='Это от бригады №' num=team.index  tasks=team.tasks}}
+    {{else}}
+      -- нет заявок --
+    {{/if}}
+
+    {{log team.date}}    
   </div>
 {{/each}}  

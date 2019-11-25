@@ -1,5 +1,6 @@
 export function getFormDate(params) {
-    let date = params[0];
+    let date = params[0].getFullYear() + '-' + (params[0].getMonth() + 1) + '-' + params[0].getDate();
+    date = new Date(date);
     
     let formDate = date.getFullYear();
     formDate += '-';
