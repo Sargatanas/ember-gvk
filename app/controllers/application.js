@@ -71,13 +71,14 @@ export default Ember.Controller.extend({
             let teamIndex = document.getElementById('add-team-id').value;
             let context = this;
 
-            let team = this.store.findAll('team').filterBy('index', 101); 
-            console.log(team);
-            context.setProperties({
-                isShowTeam: true,
-                output: team
-            });     
-        },
+            this.store.queryRecord('team', { index: teamIndex }).then(function(team) {
+                console.log(team);
+                context.setProperties({
+                    isShowTeam: true,
+                    output: team
+                });
+            }); 
+        }
     }
 });
 

@@ -2,25 +2,23 @@
     "tasks": [{
         "id": 1,
         "type": "task",
-        "attributes": {
-            "index": 1,
-            "importance" : 4,
-            "adress": {
-                "street": "Пушкина",
-                "house": 44,
-                "building": "",
-                "flat": 15
-            },
-            "targets": [
-                "заварить дыру в трубе (подвал)",
-                "проверить трубы на предмет мелких протечек",
-                "восстановить изоляцию труб"
-            ],
-            "planeDuration": {
-                "hours": 2,
-                "minutes": 15
-            }                
+        "index": 1,
+        "importance" : 4,
+        "adress": {
+            "street": "Пушкина",
+            "house": 44,
+            "building": "",
+            "flat": 15
         },
+        "targets": [
+            "заварить дыру в трубе (подвал)",
+            "проверить трубы на предмет мелких протечек",
+            "восстановить изоляцию труб"
+        ],
+        "planeDuration": {
+            "hours": 2,
+            "minutes": 15
+        },                
         "relationships": {
             "team": {
                 "data": {
@@ -32,8 +30,7 @@
     }, {
         "id": 2,
         "type": "task",
-        "attributes": {
-            "index": 3,
+        "index": 3,
             "importance" : 1,
             "adress": {
               "street": "Пушкина",
@@ -48,15 +45,13 @@
             "planeDuration": {
                 "hours": 1,
                 "minutes": 0 
-            }                
-        },
+            },
         "relationships": {}
     }],
     "teams": [{
         "id": 1,
         "type": "team",
-        "attributes": {
-            "index": 101,
+        "index": 101,
             "shiftStart": {
                 "hours": 8,
                 "minutes": 0
@@ -64,8 +59,7 @@
             "shiftEnd": {
             "hours": 12,
                 "minutes": 30
-            }                                          
-        },
+            }   ,
         "relationships": {
             "task": {
                 "data": [{
@@ -77,16 +71,14 @@
     }, {
         "id": 2,
         "type": "team",
-        "attributes": {
-            "index": 102,
-            "shiftStart": {
-                "hours": 12,
-                "minutes": 30
-            },
-            "shiftEnd": {
-                "hours": 17,
-                "minutes": 0
-            }                                               
+        "index": 102,
+        "shiftStart": {
+            "hours": 12,
+            "minutes": 30
+        },
+        "shiftEnd": {
+            "hours": 17,
+            "minutes": 0
         },
         "relationships": {}
     }]

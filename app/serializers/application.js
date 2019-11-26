@@ -9,11 +9,34 @@ export default DS.JSONAPISerializer.extend({
       return key;
     },
 
-    serialize(snapshot, options) {
-      let json = this._super(...arguments);
+    normalizeResponse(store, primaryModelClass, payload, id, requestType) {
+      let array = [];
+      let key;
 
-      let newJson = json.data;
+      payload.forEach(function(element, index) {
+        let json = {};
+        json["attributes"] = {};
+        let payloadElement = payload[index];
 
-      return json;
+        for (key in element) {
+          switch (key) {
+            case "id":
+                json[key] = payloadElement[key];
+                break;
+            case "type":
+                json[key] = payloadElement[key];
+                break;
+            case "relationships":
+                json[key] = payloadElement[key];
+                break;
+            default:
+                json.attributes[key] = payloadElement[key];
+                break;
+          }
+        }
+        array.push(json);
+      }); 
+     
+      return {data: array}
     },
 });
