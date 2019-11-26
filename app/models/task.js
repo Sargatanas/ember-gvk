@@ -48,7 +48,6 @@ export default DS.Model.extend({
 
   time: Ember.computed('timeStart', function() {
     let time = this.get('timeStart');
-    console.log(time);
     if (!time) {
       return '';
     }
@@ -58,5 +57,5 @@ export default DS.Model.extend({
 
     minutes = minutes < 10 ? '0' + minutes: minutes;
     return `${this.get('timeStart').hours} ч ${minutes} мин`;
-  }),
+  })
 });

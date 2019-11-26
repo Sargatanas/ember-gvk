@@ -1,6 +1,7 @@
 {{!-- {{log comment num tasks}} --}}
 
 {{#each tasks as |task|}}
+{{log task}}
   <div class="element-body-task" style="position: static">
     <div class="element-body-task-detail">
       <span class="element-body-task-detail__header">№ заявки:</span>
@@ -36,7 +37,7 @@
         {{task.date}}
       </div>
     {{/if}}
-    {{ log task}}
+    
     {{#if task.time}}
       <div class="element-body-task-detail">
         <span class="element-body-task-detail__header">Время начала работы: </span>

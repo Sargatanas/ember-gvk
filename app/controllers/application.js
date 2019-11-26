@@ -68,7 +68,7 @@ export default Ember.Controller.extend({
 
         showTasks(e) {
            let teamIndex = document.getElementById('add-team-id').value;
-            let context = this;
+           let context = this;
 
             this.store.queryRecord('team', { index: teamIndex }).then(function(team) {
                 context.setProperties({
@@ -76,6 +76,43 @@ export default Ember.Controller.extend({
                     currentTeam: team
                 });
             }); 
+        },
+
+        createTask(hour) {
+            let teamIndex = document.getElementById('add-team-id').value;
+
+
+            let currentDate = new Date(document.getElementById('add-date').value);
+            currentDate.setHours(0);
+            currentDate.setMinutes(0);
+            currentDate.setSeconds(0);
+            currentDate.setMilliseconds(0);
+
+            let currentDay = currentDate.getDay() - 1;
+            currentDay = currentDay === -1 ? 6: currentDay;
+
+            let dateShift = index - currentDay;
+            
+            currentDate.setDate(currentDate.getDate() + dateShift);
+
+
+            console.log(hour, teamIndex, currentDate);
+            this.setProperties({
+                hasTask: true
+            });
+
+            let formDate = currentDate.getFullYear();
+            formDate += '-';
+            formDate += (currentDate.getMonth() + 1) <= 9 ? '0' + (currentDate.getMonth() + 1) : (currentDate.getMonth() + 1);
+            formDate += '-';
+            formDate += currentDate.getDate() <= 9 ? '0' + currentDate.getDate() : currentDate.getDate();
+
+            let context = this;
+            let store = this.get('taskServ').findTask({ date : formDate });
+            console.log(store);
+            store.find('task', { date : formDate }).then(function(task) {
+                console.log(task);
+            });
         }
     }
 });

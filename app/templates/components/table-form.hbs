@@ -27,7 +27,7 @@
             </th>
         </tr>
         {{#each hours as |hour|}}
-            {{table-row hour=hour date=date day=day}}
+            {{table-row hour=hour date=(getDate day.id date.value)}}
         {{/each}}        
     </table>
 </div>

@@ -62,8 +62,10 @@ export default DS.JSONAPISerializer.extend({
           let includedElement = included[i];
           let elementId = includedElement.id; 
           store.findRecord('task', elementId).then(function(task) {
-              for (key in includedElement.attributes) {
-                task.set(key, includedElement[key]);
+              let copy;     
+              copy = Object.assign({}, includedElement.attributes);
+              for (key in copy) {
+                task.set(key, copy[key]);
               }
           });  
         }
