@@ -10,10 +10,15 @@ export default DS.JSONAPISerializer.extend({
     },
 
     normalizeResponse(store, primaryModelClass, payload, id, requestType) {
-      let array = [];
-      let key;
+      /* debugger */
 
-      payload.forEach(function(element, index) {
+      let array = [];
+      let included = [];
+      let key;
+      let type;
+
+      for (let index = 0; index < payload.length; index++) {
+        let element = payload[index];
         let json = {};
         json["attributes"] = {};
         let payloadElement = payload[index];
@@ -24,19 +29,51 @@ export default DS.JSONAPISerializer.extend({
                 json[key] = payloadElement[key];
                 break;
             case "type":
+                type = payloadElement[key];
                 json[key] = payloadElement[key];
                 break;
             case "relationships":
                 json[key] = payloadElement[key];
+                break;
+            case "included":
+                payloadElement[key].forEach(function (includedElement) {
+                  included.push(includedElement); 
+                });                
                 break;
             default:
                 json.attributes[key] = payloadElement[key];
                 break;
           }
         }
+
+        if (type="task") {
+          json.attributes['date'] = '';
+          json.attributes['time'] = {
+            hours: '',
+            minuters: ''
+          }
+        }
+
         array.push(json);
-      }); 
+      }
+
+      if (type === 'team') {
+        for (let i = 0; i < included.length; i++) {
+          let includedElement = included[i];
+          let elementId = includedElement.id; 
+          store.findRecord('task', elementId).then(function(task) {
+              for (key in includedElement.attributes) {
+                task.set(key, includedElement[key]);
+              }
+          });  
+        }
+      }
      
-      return {data: array}
+      return {
+        data: array,
+        included: included
+      }
     },
+
+
 });

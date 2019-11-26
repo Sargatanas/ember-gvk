@@ -5,7 +5,7 @@ export function getDate(params) {
 
   let date = params[1];
   let currentDate = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
-  currentDate = new Date(currentDate);
+  currentDate = typeof params[1] === 'string' ? params[1] : new Date(currentDate);
 
   currentDate.setHours(0);
   currentDate.setMinutes(0);

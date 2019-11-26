@@ -23,23 +23,31 @@
         <button 
             class="form-header__element form-header__element_button" 
             id="button"
-            onclick={{action "showTable"}}>
-                Показать
+            {{action "showTable"}}>
+                Показать таблицу
+        </button>
+            
+        <button 
+            class="form-header__element form-header__element_button" 
+            id="button"
+            {{action "showTasks"}}>
+                Вывести задачи
         </button>
     </header>
    <main 
         class="form-body" 
         id="table">
-            {{#if isShowTeam}}
-                {{form-team teams=output}}
+            {{#if isShowTasks}}
+                {{#each currentTeam as |team|}}
+                    {{form-task tasks=team.tasks}}                     
+                {{/each}}
             {{/if}} 
             {{outlet}} 
-            <br><br> 
-            {{#if isShow}}
+            {{#if isShowTable}}
                 {{#each week as |day|}}
                     {{table-form hours=hours day=day date=date status=status}}
                 {{/each}}
-            {{/if}}                 
+            {{/if}}              
     </main>
 
     <footer>

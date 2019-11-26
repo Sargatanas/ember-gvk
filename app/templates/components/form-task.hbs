@@ -30,5 +30,18 @@
       </div>
     {{/if}}
 
+    {{#if task.date}}
+      <div class="element-body-task-detail">
+        <span class="element-body-task-detail__header">Дата выполнения работы: </span>
+        {{task.date}}
+      </div>
+    {{/if}}
+    {{ log task}}
+    {{#if task.time}}
+      <div class="element-body-task-detail">
+        <span class="element-body-task-detail__header">Время начала работы: </span>
+        {{task.time}}
+      </div>
+    {{/if}}
   </div>
 {{/each}}   

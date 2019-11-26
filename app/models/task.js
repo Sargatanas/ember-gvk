@@ -18,6 +18,13 @@ export default DS.Model.extend({
     minutes: DS.attr('number'),
   }),
 
+  team: DS.belongsTo('team', {async: true}),
+  timeStart: DS.attr('object', {
+    hours: DS.attr('number'),
+    minutes: DS.attr('number'),
+  }),
+  date: DS.attr(),
+
   fullAdress: Ember.computed('adress', function() {
     let adress = 'Ул. ';
     adress += this.get('adress').street + ', д.';
@@ -39,5 +46,17 @@ export default DS.Model.extend({
     return `${this.get('planeDuration').hours} ч ${minutes} мин`;
   }),
 
-  team: DS.belongsTo('team', {async: true})
+  time: Ember.computed('timeStart', function() {
+    let time = this.get('timeStart');
+    console.log(time);
+    if (!time) {
+      return '';
+    }
+
+    let hours = this.get('timeStart').hours;
+    let minutes = this.get('timeStart').minutes;
+
+    minutes = minutes < 10 ? '0' + minutes: minutes;
+    return `${this.get('timeStart').hours} ч ${minutes} мин`;
+  }),
 });

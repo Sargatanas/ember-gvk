@@ -1,4 +1,6 @@
 <td class="element-body__cell">
     {{hour}}:00
 </td>
-<td class="element-body__cell query-hour-{{hour}}" name="{{getFormDate date}}"></td>
+<td
+    class="element-body__cell query-hour-{{hour}}" 
+    data-name="{{getFormDate (getDate day.id date.value)}}"></td>
