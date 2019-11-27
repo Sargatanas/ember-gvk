@@ -1,4 +1,4 @@
-import getDateForm from './date-form'
+import getDateForm from './date-form';
 
 export default function dateNullable(date) {
   let currentDate = new Date(getDateForm(date));

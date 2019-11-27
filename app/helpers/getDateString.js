@@ -8,6 +8,6 @@ export function getDateString(params) {
 
     let currentDate = dateShift(index, date);
     return dateString(currentDate);
-};
+}
 
 export default Ember.Helper.helper(getDateString);

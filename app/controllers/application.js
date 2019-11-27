@@ -106,7 +106,7 @@ export default Ember.Controller.extend({
                 let currentDate = dateShift(i, date);
                 let formDate = dateForm(currentDate);
 
-                store.queryRecord('task', { date: formDate, teamIndex: teamIndex }).then(function(task) {
+                store.queryRecord('task', { date: formDate, teamIndex: teamIndex }).then((task) => {
                     task.forEach(function (element) {
                         let date = element.get('date');
                         for (let i = 0; i < 7; i++) {

@@ -5,7 +5,7 @@ export default DS.JSONAPISerializer.extend({
       return key;
     },
 
-    keyForRelationship: function(key, relationship, method) {
+    keyForRelationship: function(key) {
       return key;
     },
 
@@ -36,7 +36,7 @@ export default DS.JSONAPISerializer.extend({
                 json[key] = payloadElement[key];
                 break;
             case "included":
-                payloadElement[key].forEach(function (includedElement) {
+                payloadElement[key].forEach((includedElement) => {
                   included.push(includedElement); 
                 });                
                 break;
@@ -52,6 +52,6 @@ export default DS.JSONAPISerializer.extend({
       return {
         data: array,
         included: included
-      }
+      };
     },
 });
