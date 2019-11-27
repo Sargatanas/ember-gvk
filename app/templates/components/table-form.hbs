@@ -10,27 +10,30 @@
             Всего задач: 
             <span 
                 id='total-tasks-{{day.en}}' 
-                class="element-header__cell-content">
-                0
+                class="element-header__cell-content element-header__cell-content_{{day.en}}">
+                {{totalTask}}
             </span>
         </div>
     </div>
-    <table 
-        class="element-body" 
-        id="table-content">
-        <tr class="element-body__row">
-            <th class="element-body__cell">
-                Время
-            </th>
-            <th class="element-body__cell">
-                Детали задачи
-            </th>
-        </tr>
-        {{#each hours as |hour|}}
-            {{table-row hour=hour 
-                        date=(getDate day.id date.value) 
-                        currentDate=(getDateForm (getDate day.id date.value))
-                        taskList=taskList}}
-        {{/each}}        
-    </table>
+    {{#if (isTotalCountEmpty totalTask)}}
+        <table
+            class="element-body" 
+            id="table-content">
+            <tr class="element-body__row">
+                <th class="element-body__cell">
+                    Время
+                </th>
+                <th class="element-body__cell">
+                    Детали задачи
+                </th>
+            </tr>
+            {{#each hours as |hour|}}
+                {{table-row hour=hour 
+                            date=(getDate day.id date.value) 
+                            currentDate=(getDateForm (getDate day.id date.value))
+                            taskList=taskList
+                            day=day.en}}
+            {{/each}}        
+        </table>
+    {{/if}}    
 </div>

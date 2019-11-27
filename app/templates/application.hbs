@@ -7,7 +7,7 @@
                 id="add-team-id" 
                 name="id" 
                 value="101"
-                {{action "changeData" on="focusIn"}}>
+                {{action "createTasks" on="input"}}>
         </label>
         
         <label 
@@ -19,7 +19,7 @@
                     id="add-date" 
                     name="id"
                     value={{getDateForm date.value}}
-                    {{action "changeData" on="focusIn"}}>
+                    {{action "createTasks" on="input"}}>
         </label>
         
         {{#if isTasksCreated}}
@@ -48,7 +48,8 @@
                                  day=day 
                                  date=date 
                                  status=status 
-                                 taskList=taskList}}
+                                 taskList=taskList
+                                 totalTask=(getTotalTask (getDateForm (getDate day.id date.value)) taskCount)}}
                 {{/each}}
             {{/if}}              
     </main>

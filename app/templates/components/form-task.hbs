@@ -1,9 +1,10 @@
 {{#each tasks as |task|}}
-  <div class="element-body-task" style="position: static">
+  <div class="element-body-task">
     <div class="element-body-task-detail">
       <span class="element-body-task-detail__header">№ заявки:</span>
       {{task.index}}
     </div> 
+
     <ol class="element-body-task-detail" id="details">
       <li class="element-body-task-detail__header" value="0">Задачи:</li>
         {{#each task.targets as |target|}}
@@ -12,34 +13,15 @@
           </li>
         {{/each}}
     </ol>
+
     <div class="element-body-task-detail">
       <span class="element-body-task-detail__header">Адрес:</span>
       {{task.fullAdress}}
     </div>
+
     <div class="element-body-task-detail">
       <span class="element-body-task-detail__header">Предварительная длительность работ: </span>
       {{task.planeTime}}
     </div>
-
-    {{!-- {{#if task.team}}
-      <div class="element-body-task-detail">
-        <span class="element-body-task-detail__header">Выполняющая бригада: </span>
-        № {{task.team.index}}
-      </div>
-    {{/if}}
-
-    {{#if task.date}}
-      <div class="element-body-task-detail">
-        <span class="element-body-task-detail__header">Дата выполнения работы: </span>
-        {{task.stringDate}}
-      </div>
-    {{/if}}
-    
-    {{#if task.time}}
-      <div class="element-body-task-detail">
-        <span class="element-body-task-detail__header">Время начала работы: </span>
-        {{task.time}}
-      </div>
-    {{/if}} --}}
   </div>
 {{/each}}   
