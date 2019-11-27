@@ -1,5 +1,5 @@
 {{#each tasks as |task|}}
-  <div class="element-body-task">
+  <div class="element-body-task {{class}}" {{action "toggleTask" on='click'}}>
     <div class="element-body-task-detail">
       <span class="element-body-task-detail__header">№ заявки:</span>
       {{task.index}}

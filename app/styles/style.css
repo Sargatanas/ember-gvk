@@ -110,25 +110,33 @@
 
 .element-body-task {
     position: absolute;
-    top: 10px;
+    top: 0;
     left: 10px;
-    z-index: 2;
 
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    width: 80%;
+    
+    width: 80%;    
     overflow: hidden;
     box-sizing: border-box;
 
     margin-bottom: 10px;
-    padding: 10px 30px 10px 10px;
+    padding: 5px 30px 10px 10px;
 
     background: white; 
     box-shadow: 5px 5px 10px 0 rgba(0,0,0,0.5);
     
     cursor: pointer;
     transition-duration: 0.3s;
+}
+.element-body-task_resize {
+    z-index: 2;
+    height: 30px;
+}
+.element-body-task_open {
+    z-index: 100;
+    height: auto;
 }
 .element-body-task_resize:before {
     content: '';
@@ -151,7 +159,7 @@
     width: 20px;
     height: 100%;
 
-    background: white url('../resources/img/double-bottom.png') no-repeat 50% 50%;
+    background: white url('/assets/images/double-bottom.png') no-repeat 50% 50%;
     background-size: 100% auto;
 }
 .element-body-task_open:after {
@@ -164,7 +172,7 @@
     width: 20px;
     height: 100%;
 
-    background: white url('../resources/img/double-top.png') no-repeat 50% 50%;
+    background: white url('/assets/images/double-top.png') no-repeat 50% 50%;
     background-size: 100% auto;
 }
 
@@ -172,11 +180,9 @@
     width: 100%;
 
     margin: 0 0 5px 0;
-    padding: 5px;
     text-align: left;
 
     border-radius: 5px;
-    background: #d8d8d8;
 }
 .element-body-task-detail__element {
     margin-left: 15px;
