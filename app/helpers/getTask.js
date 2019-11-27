@@ -7,15 +7,9 @@ export function getTask(params) {
   let taskHour = Number(params[3]);
   let currentHour = Number(params[4]);
 
-  /* console.log('Это при выборе задач на день', task);
-  console.log(taskDate, currentDate);
-  console.log(taskHour, currentHour);
-  console.log(''); */
-
   if ((currentDate === taskDate) && (currentHour === taskHour)) {
     return [task];
   }
-
   return '';
 }
 

@@ -1,25 +1,11 @@
 import Ember from 'ember';
+import dateShift from '../utils/date-shift';
 
 export function getDate(params) {
-  let index = params[0];
+  let index = params[0];  
+  let date = typeof params[1] === 'string' ? new Date() : params[1];  
 
-  let date = params[1];
-  let currentDate = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
-  currentDate = typeof params[1] === 'string' ? params[1] : new Date(currentDate);
-
-  currentDate.setHours(0);
-  currentDate.setMinutes(0);
-  currentDate.setSeconds(0);
-  currentDate.setMilliseconds(0);
-
-  let currentDay = currentDate.getDay() - 1;
-  currentDay = currentDay === -1 ? 6: currentDay;
-
-  let dateShift = index - currentDay;
-   
-  currentDate.setDate(currentDate.getDate() + dateShift);
-       
-  return currentDate;
+  return dateShift(index, date);
 }
 
 export default Ember.Helper.helper(getDate);

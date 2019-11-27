@@ -1,4 +1,7 @@
 import Ember from 'ember';
+import dateForm from '../utils/date-form';
+import dateShift from '../utils/date-shift';
+import dateNullable from '../utils/date-nullable';
 
 export default Ember.Controller.extend({
     hours: [8, 9, 10, 11, 12, 13, 14, 15, 16, 17],
@@ -49,6 +52,8 @@ export default Ember.Controller.extend({
     
     actions: {
         showTable() {
+            
+
             let newDate = new Date(document.getElementById('add-date').value);
 
             let newDateId = newDate.getDay() - 1;
@@ -77,35 +82,14 @@ export default Ember.Controller.extend({
             let teamIndex = document.getElementById('add-team-id').value;
 
             let date = new Date(document.getElementById('add-date').value);
-            date.setHours(0);
-            date.setMinutes(0);
-            date.setSeconds(0);
-            date.setMilliseconds(0);
+            date = dateNullable(date);
 
             let tasks = [];
 
             let store = this.store;
-            for (let i = 0; i < 7; i++) {
-                let formDate = date.getFullYear();
-                formDate += '-';
-                formDate += (date.getMonth() + 1) <= 9 ? '0' + (date.getMonth() + 1) : (date.getMonth() + 1);
-                formDate += '-';
-                formDate += date.getDate() <= 9 ? '0' + date.getDate() : date.getDate();
-
-                let currentDate = new Date(formDate);
-                let currentDay = currentDate.getDay() - 1;
-                currentDay = currentDay === -1 ? 6: currentDay;
-
-                let dateShift = i - currentDay;
-                
-                currentDate.setDate(currentDate.getDate() + dateShift);
-
-                formDate = currentDate.getFullYear();
-                formDate += '-';
-                formDate += (currentDate.getMonth() + 1) <= 9 ? '0' + (currentDate.getMonth() + 1) : (currentDate.getMonth() + 1);
-                formDate += '-';
-                formDate += currentDate.getDate() <= 9 ? '0' + currentDate.getDate() : currentDate.getDate();
-
+            for (let i = 0; i < 7; i++) {                
+                let currentDate = dateShift(i, date);
+                let formDate = dateForm(currentDate);
 
                 store.queryRecord('task', { date: formDate, teamIndex: teamIndex }).then(function(task) {
                     task.forEach(function (element) {
