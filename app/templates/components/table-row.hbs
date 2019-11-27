@@ -4,7 +4,8 @@
 <td class="element-body__cell query-hour-{{hour}}" 
     data-name="{{getDateForm date}}">
         {{#each taskList as |task|}}
-            {{form-task day=day
+            {{form-task comment='table'
+                        taskClass="element-body-task_resize"
                         tasks=(getTask task 
                                        task.date
                                        currentDate  

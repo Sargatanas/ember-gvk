@@ -29,6 +29,7 @@
                 {{action "showTable"}}>
                     Показать таблицу
             </button>
+            {{form-task tasks=freeTaskList}}
         {{else}}
             <button 
                 class="form-header__element form-header__element_button" 
@@ -36,21 +37,28 @@
                 {{action "createTasks"}}>
                     Генерировать список заявок
             </button>
-        {{/if}}
-        
+        {{/if}}        
     </header>
-   <main 
-        class="form-body" 
-        id="table"> 
-            {{#if isShowTable}}
-                {{#each week as |day|}}
-                    {{table-form hours=hours 
-                                 day=day 
-                                 date=date 
-                                 status=status 
-                                 taskList=taskList
-                                 totalTask=(getTotalTask (getDateForm (getDate day.id date.value)) taskCount)}}
-                {{/each}}
-            {{/if}}              
-    </main>
+    {{#if isShowTable}}
+        <main 
+            class="form-body" 
+            id="table">                 
+                    {{#each week as |day|}}
+                        {{table-form hours=hours 
+                                    day=day 
+                                    date=date 
+                                    status=status 
+                                    taskList=taskList
+                                    freeTaskList=freeTaskList
+                                    totalTask=(getTotalTask (getDateForm (getDate day.id date.value)) taskCount)}}
+                    {{/each}}             
+        </main>
+
+        <footer class="form-footer">
+            <h2 class="form-footer__title">
+                Свободные заявки
+            </h2>
+            {{form-task taskClass="element-body-task_not-table" tasks=freeTaskList}}        
+        </footer>
+    {{/if}} 
 </div>

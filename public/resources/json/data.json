@@ -3,7 +3,7 @@
     {
       "id": 1,
       "type": "task",
-      "index": 1,
+      "index": 1021,
       "importance": 4,
       "adress": {
         "street": "Пушкина",
@@ -40,7 +40,7 @@
     {
       "id": 2,
       "type": "task",
-      "index": 3,
+      "index": 1043,
       "importance": 1,
       "adress": {
         "street": "Пушкина",
@@ -56,12 +56,12 @@
         "hours": 1,
         "minutes": 0
       },
-      "teamIndex": 101,
+      "teamIndex": "",
       "timeStart": {
-        "hours": 12,
-        "minutes": 30
+        "hours": "",
+        "minutes": ""
       },
-      "date": "2019-11-28",
+      "date": "",
       
       "relationships": {
         "team": {

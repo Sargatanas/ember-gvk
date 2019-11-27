@@ -48,8 +48,11 @@ export default Ember.Controller.extend({
     currentDate: '',
 
     taskList: '',
+    freeTaskList: '',
     taskCount: '',
     isTasksCreated: false,
+    isnotTableTask: false,
+    isTableTask: true,
     
     actions: {
         showTable() {
@@ -84,8 +87,6 @@ export default Ember.Controller.extend({
 
             let date = new Date(document.getElementById('add-date').value);
             date = dateNullable(date);
-
-            let tasks = [];
             let dates = [];
 
             for (let i = 0; i < 7; i++) {
@@ -96,6 +97,9 @@ export default Ember.Controller.extend({
                 content['count'] = 0;
                 dates.push(content);
             }
+
+            let selectedTasks = [];
+            let nonSelectedTasks = [];
 
             let store = this.store;
             for (let i = 0; i < 7; i++) {                
@@ -108,14 +112,21 @@ export default Ember.Controller.extend({
                         for (let i = 0; i < 7; i++) {
                             dates[i].count = dates[i].date === date ? dates[i].count + 1 : dates[i].count;
                         }
-
-                        tasks.push(element);  
+                        selectedTasks.push(element);  
                     });                                     
                 });
             }
 
+            store.queryRecord('task', { teamIndex: '' }).then(function(task) {
+                task.forEach(function (element) {
+                   let id = element.get('id');
+                   nonSelectedTasks.push(element);  
+                });                                  
+            });
+
             this.setProperties({
-                taskList: tasks,
+                taskList: selectedTasks,
+                freeTaskList: nonSelectedTasks,
                 taskCount: dates,
                 isTasksCreated: true
             });       
