@@ -1,4 +1,4 @@
-export function getFormDate(params) {
+export function getDateForm(params) {
     let date = params[0].getFullYear() + '-' + (params[0].getMonth() + 1) + '-' + params[0].getDate();
     date = new Date(date);
     
@@ -11,4 +11,4 @@ export function getFormDate(params) {
     return formDate;
 };
 
-export default Ember.Helper.helper(getFormDate);
+export default Ember.Helper.helper(getDateForm);

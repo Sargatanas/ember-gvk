@@ -20,6 +20,14 @@
         "hours": 2,
         "minutes": 15
       },
+
+      "teamIndex": 101,
+      "timeStart": {
+        "hours": 9,
+        "minutes": 0
+      },
+      "date": "2019-11-28",
+      
       "relationships": {
         "team": {
           "data": {
@@ -48,7 +56,21 @@
         "hours": 1,
         "minutes": 0
       },
-      "relationships": {}
+      "teamIndex": 101,
+      "timeStart": {
+        "hours": 11,
+        "minutes": 30
+      },
+      "date": "2019-11-28",
+      
+      "relationships": {
+        "team": {
+          "data": {
+            "id": "1",
+            "type": "team"
+          }
+        }
+      }
     }
   ],
   "teams": [
@@ -73,20 +95,7 @@
             }
           ]
         }
-      },
-      "included": [
-        {
-          "id": 1,
-          "type": "task",
-          "attributes": {
-            "timeStart": {
-              "hours": 9,
-              "minutes": 0
-            },
-            "date": "2019-11-28"
-          }
-        }
-      ]
+      }
     },
     {
       "id": 2,

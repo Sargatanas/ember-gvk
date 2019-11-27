@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import Task from '../models/task'
 
 export default Ember.Controller.extend({
     hours: [8, 9, 10, 11, 12, 13, 14, 15, 16, 17],
@@ -43,6 +44,8 @@ export default Ember.Controller.extend({
         value: new Date(),
     },
     currentDate: '',
+
+    taskList: '',
     
     actions: {
         showTable(e) {
@@ -81,38 +84,48 @@ export default Ember.Controller.extend({
         createTask(hour) {
             let teamIndex = document.getElementById('add-team-id').value;
 
+            let date = new Date(document.getElementById('add-date').value);
+            date.setHours(0);
+            date.setMinutes(0);
+            date.setSeconds(0);
+            date.setMilliseconds(0);
 
-            let currentDate = new Date(document.getElementById('add-date').value);
-            currentDate.setHours(0);
-            currentDate.setMinutes(0);
-            currentDate.setSeconds(0);
-            currentDate.setMilliseconds(0);
+            let tasks = [];
 
-            let currentDay = currentDate.getDay() - 1;
-            currentDay = currentDay === -1 ? 6: currentDay;
+            let store = this.store;
+            for (let i = 0; i < 7; i++) {
+                let formDate = date.getFullYear();
+                formDate += '-';
+                formDate += (date.getMonth() + 1) <= 9 ? '0' + (date.getMonth() + 1) : (date.getMonth() + 1);
+                formDate += '-';
+                formDate += date.getDate() <= 9 ? '0' + date.getDate() : date.getDate();
 
-            let dateShift = index - currentDay;
-            
-            currentDate.setDate(currentDate.getDate() + dateShift);
+                let currentDate = new Date(formDate);
+                let currentDay = currentDate.getDay() - 1;
+                currentDay = currentDay === -1 ? 6: currentDay;
+
+                let dateShift = i - currentDay;
+                
+                currentDate.setDate(currentDate.getDate() + dateShift);
+
+                formDate = currentDate.getFullYear();
+                formDate += '-';
+                formDate += (currentDate.getMonth() + 1) <= 9 ? '0' + (currentDate.getMonth() + 1) : (currentDate.getMonth() + 1);
+                formDate += '-';
+                formDate += currentDate.getDate() <= 9 ? '0' + currentDate.getDate() : currentDate.getDate();
 
 
-            console.log(hour, teamIndex, currentDate);
+                store.queryRecord('task', { date: formDate, teamIndex: teamIndex }).then(function(task) {
+                    task.forEach(function (element) {
+                        tasks.push(element);  
+                    });                                     
+                });
+            }
+
+            console.log(`Список задач на неделю для бригады ${teamIndex}`, tasks);
             this.setProperties({
-                hasTask: true
-            });
-
-            let formDate = currentDate.getFullYear();
-            formDate += '-';
-            formDate += (currentDate.getMonth() + 1) <= 9 ? '0' + (currentDate.getMonth() + 1) : (currentDate.getMonth() + 1);
-            formDate += '-';
-            formDate += currentDate.getDate() <= 9 ? '0' + currentDate.getDate() : currentDate.getDate();
-
-            let context = this;
-            let store = this.get('taskServ').findTask({ date : formDate });
-            console.log(store);
-            store.find('task', { date : formDate }).then(function(task) {
-                console.log(task);
-            });
+                taskList: tasks
+            });       
         }
     }
 });

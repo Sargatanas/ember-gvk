@@ -2,4 +2,12 @@
     {{hour}}:00
 </td>
 <td class="element-body__cell query-hour-{{hour}}" 
-    data-name="{{getFormDate date}}"></td>
+    data-name="{{getDateForm date}}">
+        {{#each taskList as |task|}}
+            {{form-task tasks=(getTask task 
+                                       task.date
+                                       currentDate  
+                                       task.timeStart.hours 
+                                       hour)}}
+        {{/each}}
+</td>

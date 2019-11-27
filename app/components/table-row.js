@@ -6,10 +6,11 @@ export default Ember.Component.extend({
     
     hasTask: false,
 
-    store: Ember.inject.service(),
-    taskServ: Ember.inject.service('task'),
-
     actions: {
-        
+       showTask() {
+           this.setProperties({
+               hasTask: true
+           });       
+        } 
     }
 });

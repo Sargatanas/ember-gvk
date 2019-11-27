@@ -17,44 +17,35 @@
                     type="date" 
                     id="add-date" 
                     name="id"
-                    value={{getFormDate date.value}}>
+                    value={{getDateForm date.value}}>
         </label>
             
         <button 
             class="form-header__element form-header__element_button" 
             id="button"
-            {{action "showTable"}}>
+            {{action "createTask" on="focusIn"}}
+            {{action "showTable" on="click"}}>
                 Показать таблицу
         </button>
             
         <button 
             class="form-header__element form-header__element_button" 
             id="button"
-            {{action "showTasks"}}>
+            {{action "createTask"}}>
                 Вывести задачи
         </button>
     </header>
    <main 
         class="form-body" 
-        id="table">
-            {{#if isShowTasks}}
-                {{#each currentTeam as |team|}}
-                    {{form-task tasks=team.tasks}}                     
-                {{/each}}
-            {{/if}} 
-            {{outlet}} 
+        id="table"> 
             {{#if isShowTable}}
                 {{#each week as |day|}}
-                    {{table-form hours=hours day=day date=date status=status}}
+                    {{table-form hours=hours 
+                                 day=day 
+                                 date=date 
+                                 status=status 
+                                 taskList=taskList}}
                 {{/each}}
             {{/if}}              
     </main>
-
-    <footer>
-        <h2>Список заявок</h2>
-        {{form-task comment='Это из общего списка' num='' tasks=tasks}}
-
-        <h2>Список бригад</h2>
-        {{form-team teams=teams}}
-    </footer>
 </div>

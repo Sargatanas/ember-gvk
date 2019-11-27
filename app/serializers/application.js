@@ -46,29 +46,7 @@ export default DS.JSONAPISerializer.extend({
           }
         }
 
-        if (type="task") {
-          json.attributes['date'] = '';
-          json.attributes['time'] = {
-            hours: '',
-            minuters: ''
-          }
-        }
-
         array.push(json);
-      }
-
-      if (type === 'team') {
-        for (let i = 0; i < included.length; i++) {
-          let includedElement = included[i];
-          let elementId = includedElement.id; 
-          store.findRecord('task', elementId).then(function(task) {
-              let copy;     
-              copy = Object.assign({}, includedElement.attributes);
-              for (key in copy) {
-                task.set(key, copy[key]);
-              }
-          });  
-        }
       }
      
       return {
@@ -76,6 +54,4 @@ export default DS.JSONAPISerializer.extend({
         included: included
       }
     },
-
-
 });

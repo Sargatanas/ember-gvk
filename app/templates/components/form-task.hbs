@@ -1,7 +1,4 @@
-{{!-- {{log comment num tasks}} --}}
-
 {{#each tasks as |task|}}
-{{log task}}
   <div class="element-body-task" style="position: static">
     <div class="element-body-task-detail">
       <span class="element-body-task-detail__header">№ заявки:</span>
@@ -24,7 +21,7 @@
       {{task.planeTime}}
     </div>
 
-    {{#if task.team}}
+    {{!-- {{#if task.team}}
       <div class="element-body-task-detail">
         <span class="element-body-task-detail__header">Выполняющая бригада: </span>
         № {{task.team.index}}
@@ -34,7 +31,7 @@
     {{#if task.date}}
       <div class="element-body-task-detail">
         <span class="element-body-task-detail__header">Дата выполнения работы: </span>
-        {{task.date}}
+        {{task.stringDate}}
       </div>
     {{/if}}
     
@@ -43,6 +40,6 @@
         <span class="element-body-task-detail__header">Время начала работы: </span>
         {{task.time}}
       </div>
-    {{/if}}
+    {{/if}} --}}
   </div>
 {{/each}}   

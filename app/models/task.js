@@ -19,6 +19,7 @@ export default DS.Model.extend({
   }),
 
   team: DS.belongsTo('team', {async: true}),
+  teamIndex: DS.attr('number'),
   timeStart: DS.attr('object', {
     hours: DS.attr('number'),
     minutes: DS.attr('number'),
@@ -57,5 +58,21 @@ export default DS.Model.extend({
 
     minutes = minutes < 10 ? '0' + minutes: minutes;
     return `${this.get('timeStart').hours} ч ${minutes} мин`;
-  })
+  }),
+
+  stringDate: Ember.computed('date', function() {
+    let date = this.get('date');
+    if (!date) {
+      return '';
+    }
+
+    date = new Date(date);
+    let fullDate = date.getDate() <= 9 ? '0' + date.getDate() : date.getDate();
+    fullDate += '.';
+    fullDate += (date.getMonth() + 1) <= 9 ? '0' + (date.getMonth() + 1) : (date.getMonth() + 1);
+    fullDate += '.';
+    fullDate += date.getFullYear();
+
+    return fullDate;
+  }),
 });

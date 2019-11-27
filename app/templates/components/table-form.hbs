@@ -27,7 +27,10 @@
             </th>
         </tr>
         {{#each hours as |hour|}}
-            {{table-row hour=hour date=(getDate day.id date.value)}}
+            {{table-row hour=hour 
+                        date=(getDate day.id date.value) 
+                        currentDate=(getDateForm (getDate day.id date.value))
+                        taskList=taskList}}
         {{/each}}        
     </table>
 </div>
