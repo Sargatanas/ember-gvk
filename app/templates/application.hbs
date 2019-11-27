@@ -6,7 +6,8 @@
                 type="number" 
                 id="add-team-id" 
                 name="id" 
-                value="101">
+                value="101"
+                {{action "changeData" on="focusIn"}}>
         </label>
         
         <label 
@@ -17,16 +18,26 @@
                     type="date" 
                     id="add-date" 
                     name="id"
-                    value={{getDateForm date.value}}>
+                    value={{getDateForm date.value}}
+                    {{action "changeData" on="focusIn"}}>
         </label>
-            
-        <button 
-            class="form-header__element form-header__element_button" 
-            id="button"
-            {{action "createTask" on="focusIn"}}
-            {{action "showTable" on="click"}}>
-                Показать таблицу
-        </button>
+        
+        {{#if isTasksCreated}}
+            <button 
+                class="form-header__element form-header__element_button" 
+                id="button"
+                {{action "showTable"}}>
+                    Показать таблицу
+            </button>
+        {{else}}
+            <button 
+                class="form-header__element form-header__element_button" 
+                id="button"
+                {{action "createTasks"}}>
+                    Генерировать список заявок
+            </button>
+        {{/if}}
+        
     </header>
    <main 
         class="form-body" 

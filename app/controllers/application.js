@@ -1,5 +1,4 @@
 import Ember from 'ember';
-import Task from '../models/task'
 
 export default Ember.Controller.extend({
     hours: [8, 9, 10, 11, 12, 13, 14, 15, 16, 17],
@@ -46,9 +45,10 @@ export default Ember.Controller.extend({
     currentDate: '',
 
     taskList: '',
+    isTasksCreated: false,
     
     actions: {
-        showTable(e) {
+        showTable() {
             let newDate = new Date(document.getElementById('add-date').value);
 
             let newDateId = newDate.getDay() - 1;
@@ -69,7 +69,7 @@ export default Ember.Controller.extend({
             }             
         },
 
-        createTask(hour) {
+        createTasks() {
             this.setProperties({
                 isShowTable: false
             });
@@ -113,12 +113,17 @@ export default Ember.Controller.extend({
                     });                                     
                 });
             }
-
-            console.log(`Список задач на неделю для бригады ${teamIndex}`, tasks);
             this.setProperties({
-                taskList: tasks
+                taskList: tasks,
+                isTasksCreated: true
             });       
+        },
+
+        changeData() {
+            this.setProperties({
+                isTasksCreated: false,
+                isShowTable: false
+            }); 
         }
     }
 });
-
