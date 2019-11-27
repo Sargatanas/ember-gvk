@@ -69,19 +69,11 @@ export default Ember.Controller.extend({
             }             
         },
 
-        showTasks(e) {
-           let teamIndex = document.getElementById('add-team-id').value;
-           let context = this;
-
-            this.store.queryRecord('team', { index: teamIndex }).then(function(team) {
-                context.setProperties({
-                    isShowTasks: true,
-                    currentTeam: team
-                });
-            }); 
-        },
-
         createTask(hour) {
+            this.setProperties({
+                isShowTable: false
+            });
+
             let teamIndex = document.getElementById('add-team-id').value;
 
             let date = new Date(document.getElementById('add-date').value);
