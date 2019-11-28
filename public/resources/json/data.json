@@ -167,6 +167,39 @@
           }
         }
       }
+    },
+    {
+      "id": 6,
+      "type": "task",
+      "index": 100000,
+      "importance": 4,
+      "adress": {
+        "street": "Пушкина",
+        "house": 12,
+        "building": "1",
+        "flat": ""
+      },
+      "targets": [
+        "залатать дыру в пространстве"
+      ],
+      "planeDuration": {
+        "hours": 20,
+        "minutes": 0
+      },
+      "teamIndex": "",
+      "timeStart": {
+        "hours": "",
+        "minutes": ""
+      },
+      "date": "",
+      "relationships": {
+        "team": {
+          "data": {
+            "id": "1",
+            "type": "team"
+          }
+        }
+      }
     }
   ],
   "teams": [

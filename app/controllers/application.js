@@ -5,7 +5,7 @@ import dateShift from '../utils/date-shift';
 import dateNullable from '../utils/date-nullable';
 import dateString from '../utils/date-string';
 import dateStringToForm from '../utils/data-string-to-form';
-import freeTaskList from '../utils/free-task-list';
+import sortTaskList from '../utils/sort-task-list';
 
 export default Ember.Controller.extend({
     week: [{
@@ -166,7 +166,7 @@ export default Ember.Controller.extend({
             this.setProperties({
                 isShowButtons: true,
                 inputTeamId: '101',
-                inputDate: '26.11.2019',
+                inputDate: '2019-11-26',
                 errors: {
                     team: [],
                     date: []                
@@ -249,7 +249,7 @@ export default Ember.Controller.extend({
                         } 
                     });
                     
-                    freeTaskList(nonSelectedTasks);
+                    nonSelectedTasks = sortTaskList(nonSelectedTasks);
 
                     context.setProperties({
                         isTasksCreated: true,
