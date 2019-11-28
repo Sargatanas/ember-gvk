@@ -2,6 +2,8 @@ import Ember from 'ember';
 import dateForm from '../utils/date-form';
 import dateShift from '../utils/date-shift';
 import dateNullable from '../utils/date-nullable';
+import dateString from '../utils/date-string';
+import dateStringToForm from '../utils/data-string-to-form';
 
 export default Ember.Controller.extend({
     week: [{
@@ -50,17 +52,22 @@ export default Ember.Controller.extend({
     freeTaskList: '',
     taskCount: '',
     isTasksCreated: false,
-    isnotTableTask: false,
-    isTableTask: true,
 
     shiftOptions: '',
-    errors: [],
+    errors: {
+        team: [],
+        date: []
+    },
+    currentDateString: '',
     isShowButtons: false,
     errorsStyle: 'form-header-errors_none',
+
+    inputTeamId: '',
+    inputDate: '',
     
     actions: {
         showTable() {
-            let newDate = new Date(document.getElementById('add-date').value);
+            let newDate = this.get('date').value;
 
             let newDateId = newDate.getDay() - 1;
             newDateId = newDateId === -1 ? 6: newDateId;
@@ -85,9 +92,9 @@ export default Ember.Controller.extend({
                 isShowTable: false
             });
 
-            let teamIndex = document.getElementById('add-team-id').value;
+            let teamIndex = this.get('inputTeamId');
 
-            let date = new Date(document.getElementById('add-date').value);
+            let date = this.get('date').value;
             date = dateNullable(date);
             let dates = [];
 
@@ -142,4 +149,91 @@ export default Ember.Controller.extend({
                 isTasksCreated: true
             });       
         },
+
+        validateInputs() {
+            let teamIndex = this.get('inputTeamId');
+            
+            let date = this.get('inputDate');
+            let reg = /\d\d[.]\d\d[.]\d\d\d\d$/;
+            date = date.match(reg) ? dateStringToForm(date): date;
+            date = new Date(date);
+       
+            this.setProperties({
+                isShowButtons: false,
+                isTasksCreated: false,
+                isShowTable: false,
+                errorsStyle: '',
+                currentDateString: ''
+            }); 
+
+            let teamErrors = [];
+            let dateErrors = [];
+            let errorElement = {
+                name: '',
+                error: ''
+            }
+
+            if (!teamIndex) {
+                errorElement.name = 'add-team-id';
+                errorElement.content = 'Введите номер бригады';   
+                teamErrors.push(errorElement);
+                errorElement = {
+                    name: '',
+                    error: ''
+                }             
+            } else if (isNaN(teamIndex) || (Number(teamIndex) < 1)) {
+                errorElement.name = 'add-team-id';
+                errorElement.content = 'Номер бригады должен выражаться положительным целым числом';   
+                teamErrors.push(errorElement);
+                errorElement = {
+                    name: '',
+                    error: ''
+                } 
+            }
+
+            if ((String(date) === 'Invalid Date') || !date || (Number(date) < 0)) {
+                errorElement.name = 'add-date';
+                errorElement.content = 'Введите корректную дату';
+                dateErrors.push(errorElement);
+                errorElement = {
+                    name: '',
+                    error: ''
+                }   
+            } else {
+                date = new Date(date);
+                this.setProperties({
+                    currentDateString: `(${dateString(date)})`,
+                    date: {
+                        id: date.getDay() - 1,
+                        value: date
+                    }                    
+                }); 
+            }
+
+            this.setProperties({
+                errors: {
+                    team: teamErrors,
+                    date: dateErrors
+                }
+            });
+
+            if ((dateErrors.length === 0) && (teamErrors.length === 0)) {
+                this.setProperties({
+                    isShowButtons: true
+                });
+            }
+        },
+
+        showDefaulData() {
+            this.setProperties({
+                isShowButtons: true,
+                inputTeamId: '101',
+                inputDate: '28.11.2019',
+                date: {
+                    id: new Date('2019-11-25').getDay() - 1,
+                    value: new Date('2019-11-25')
+                } 
+            });
+        }
+    }
 });

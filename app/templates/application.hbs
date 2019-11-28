@@ -1,40 +1,40 @@
 <div class="form">
+    <div class="form__comment">
+        Для теста рекомендуется использовать неделю 25.11.2019-1.12.2019 и номера бригад 101-102
+        <button 
+            class="form-header__element form-header__element_button form-header__element_small-button" 
+            {{action "showDefaulData"}}>
+                Заполнить по дефолту
+        </button>
+    </div>
+
     <header class="form-header">
         <label class="form-header__element" for="team-id">
             Номер бригады:
-            <input 
-                type="number" 
-                id="add-team-id" 
-                name="id" 
-                value="101"
-                {{action "createTasks" on="input"}}>
+            <input id="add-team-id" oninput={{action "validateInputs"}} value={{inputTeamId}}>
         </label>
+        {{input-error errors=errors.team}}
         
         <label 
             class="form-header__element" 
             for="add-date">
                 Дата (в формате ДД.ММ.ГГГГ):
-                <input 
-                    type="date" 
-                    id="add-date" 
-                    name="id"
-                    value={{getDateForm date.value}}
-                    {{action "createTasks" on="input"}}>
+                <input id="add-date" oninput={{action "validateInputs"}} value={{inputDate}}>
+                {{currentDateString}}
         </label>
+        {{input-error errors=errors.date}}
 
         {{#if isShowButtons}}
             {{#if isTasksCreated}}
                 <button 
-                    class="form-header__element form-header__element_button" 
-                    id="button"
+                    class="form-header__element form-header__element_button"
                     {{action "showTable"}}>
                         Показать таблицу
                 </button>
                 {{form-task tasks=freeTaskList}}
             {{else}}
                 <button 
-                    class="form-header__element form-header__element_button" 
-                    id="button"
+                    class="form-header__element form-header__element_button"
                     {{action "createTasks"}}>
                         Генерировать список заявок
                 </button>

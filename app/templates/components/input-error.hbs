@@ -1,0 +1,7 @@
+<div class="form-header-errors {{getErrorsStyle errors}}">
+    {{#each errors as |error|}}
+        <div class="form-header-errors__element">
+            {{error.content}}
+        </div>
+    {{/each}} 
+</div>
