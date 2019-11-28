@@ -157,6 +157,7 @@ export default Ember.Controller.extend({
             let reg = /\d\d[.]\d\d[.]\d\d\d\d$/;
             date = date.match(reg) ? dateStringToForm(date): date;
             date = new Date(date);
+
        
             this.setProperties({
                 isShowButtons: false,

@@ -11,7 +11,7 @@
     <header class="form-header">
         <label class="form-header__element" for="team-id">
             Номер бригады:
-            <input id="add-team-id" oninput={{action "validateInputs"}} value={{inputTeamId}}>
+            {{input id="add-team-id" enter="validateInputs" value=inputTeamId}}
         </label>
         {{input-error errors=errors.team}}
         
@@ -19,10 +19,13 @@
             class="form-header__element" 
             for="add-date">
                 Дата (в формате ДД.ММ.ГГГГ):
-                <input id="add-date" oninput={{action "validateInputs"}} value={{inputDate}}>
+                {{input id="add-date" enter="validateInputs" value=inputDate}}
                 {{currentDateString}}
         </label>
         {{input-error errors=errors.date}}
+        <div class="form__comment form-comment_inner">
+            По окончании ввода нажмите enter
+        </div>
 
         {{#if isShowButtons}}
             {{#if isTasksCreated}}
