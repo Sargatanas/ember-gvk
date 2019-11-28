@@ -45,7 +45,6 @@ export default DS.JSONAPISerializer.extend({
                 break;
           }
         }
-
         array.push(json);
       }
      

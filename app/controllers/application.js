@@ -6,6 +6,7 @@ import dateNullable from '../utils/date-nullable';
 import dateString from '../utils/date-string';
 import dateStringToForm from '../utils/data-string-to-form';
 import sortTaskList from '../utils/sort-task-list';
+import taskCanBeDone from '../utils/task-can-be-done';
 
 export default Ember.Controller.extend({
     week: [{
@@ -250,6 +251,7 @@ export default Ember.Controller.extend({
                     });
                     
                     nonSelectedTasks = sortTaskList(nonSelectedTasks);
+                    taskCanBeDone(context.get('teamList'), nonSelectedTasks);
 
                     context.setProperties({
                         isTasksCreated: true,

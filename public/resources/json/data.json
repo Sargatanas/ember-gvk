@@ -20,7 +20,7 @@
         "hours": 2,
         "minutes": 15
       },
-      "teamIndex": 101,
+      "teamIndex": 102,
       "timeStart": {
         "hours": 9,
         "minutes": 20
@@ -29,7 +29,7 @@
       "relationships": {
         "team": {
           "data": {
-            "id": "1",
+            "id": "2",
             "type": "team"
           }
         }
@@ -53,7 +53,7 @@
         "hours": 1,
         "minutes": 30
       },
-      "teamIndex": 102,
+      "teamIndex": 101,
       "timeStart": {
         "hours": 12,
         "minutes": 0
@@ -62,7 +62,7 @@
       "relationships": {
         "team": {
           "data": {
-            "id": "2",
+            "id": "1",
             "type": "team"
           }
         }
@@ -93,14 +93,7 @@
         "minutes": ""
       },
       "date": "",
-      "relationships": {
-        "team": {
-          "data": {
-            "id": "1",
-            "type": "team"
-          }
-        }
-      }
+      "relationships": {}
     },
     {
       "id": 4,
@@ -126,14 +119,7 @@
         "minutes": ""
       },
       "date": "",
-      "relationships": {
-        "team": {
-          "data": {
-            "id": "1",
-            "type": "team"
-          }
-        }
-      }
+      "relationships": {}
     },
     {
       "id": 5,
@@ -159,14 +145,7 @@
         "minutes": ""
       },
       "date": "",
-      "relationships": {
-        "team": {
-          "data": {
-            "id": "1",
-            "type": "team"
-          }
-        }
-      }
+      "relationships": {}
     },
     {
       "id": 6,
@@ -192,14 +171,7 @@
         "minutes": ""
       },
       "date": "",
-      "relationships": {
-        "team": {
-          "data": {
-            "id": "1",
-            "type": "team"
-          }
-        }
-      }
+      "relationships": {}
     }
   ],
   "teams": [
@@ -219,7 +191,7 @@
         "task": {
           "data": [
             {
-              "id": "1",
+              "id": "2",
               "type": "task"
             }
           ]
@@ -238,7 +210,16 @@
         "hours": 20,
         "minutes": 0
       },
-      "relationships": {}
+      "relationships": {
+        "task": {
+          "data": [
+            {
+              "id": "1",
+              "type": "task"
+            }
+          ]
+        }
+      }
     }
   ]
 }
