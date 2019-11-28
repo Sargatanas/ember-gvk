@@ -21,37 +21,39 @@
                     value={{getDateForm date.value}}
                     {{action "createTasks" on="input"}}>
         </label>
-        
-        {{#if isTasksCreated}}
-            <button 
-                class="form-header__element form-header__element_button" 
-                id="button"
-                {{action "showTable"}}>
-                    Показать таблицу
-            </button>
-            {{form-task tasks=freeTaskList}}
-        {{else}}
-            <button 
-                class="form-header__element form-header__element_button" 
-                id="button"
-                {{action "createTasks"}}>
-                    Генерировать список заявок
-            </button>
-        {{/if}}        
+
+        {{#if isShowButtons}}
+            {{#if isTasksCreated}}
+                <button 
+                    class="form-header__element form-header__element_button" 
+                    id="button"
+                    {{action "showTable"}}>
+                        Показать таблицу
+                </button>
+                {{form-task tasks=freeTaskList}}
+            {{else}}
+                <button 
+                    class="form-header__element form-header__element_button" 
+                    id="button"
+                    {{action "createTasks"}}>
+                        Генерировать список заявок
+                </button>
+            {{/if}}  
+        {{/if}}              
     </header>
     {{#if isShowTable}}
         <main 
             class="form-body" 
-            id="table">                 
-                    {{#each week as |day|}}
-                        {{table-form hours=hours 
-                                    day=day 
-                                    date=date 
-                                    status=status 
-                                    taskList=taskList
-                                    freeTaskList=freeTaskList
-                                    totalTask=(getTotalTask (getDateForm (getDate day.id date.value)) taskCount)}}
-                    {{/each}}             
+            id="table">
+                {{#each week as |day|}}
+                    {{table-form hours=hours 
+                                 day=day 
+                                 date=date 
+                                 status=status 
+                                 taskList=taskList
+                                 shiftOptions=shiftOptions
+                                 totalTask=(getTotalTask (getDateForm (getDate day.id date.value)) taskCount)}}
+                {{/each}}             
         </main>
 
         <footer class="form-footer">

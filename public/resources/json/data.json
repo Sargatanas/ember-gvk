@@ -36,8 +36,7 @@
           }
         }
       }
-    },
-    {
+    }, {
       "id": 2,
       "type": "task",
       "index": 1043,
@@ -50,7 +49,7 @@
       },
       "targets": [
         "поставить новый смеситель",
-        "прочистить засор в кухне"
+        "прочистить засор в раковине"
       ],
       "planeDuration": {
         "hours": 1,
@@ -71,6 +70,40 @@
           }
         }
       }
+    }, {
+      "id": 3,
+      "type": "task",
+      "index": 1054,
+      "importance": 2,
+      "adress": {
+        "street": "Ленина",
+        "house": 21,
+        "building": "А",
+        "flat": 26
+      },
+      "targets": [
+        "прочистить засор в раковине"
+      ],
+      "planeDuration": {
+        "hours": 1,
+        "minutes": 30
+      },
+
+      "teamIndex": 102,
+      "timeStart": {
+        "hours": 12,
+        "minutes": 0
+      },
+      "date": "2019-11-25",
+      
+      "relationships": {
+        "team": {
+          "data": {
+            "id": "2",
+            "type": "team"
+          }
+        }
+      }
     }
   ],
   "teams": [
@@ -83,7 +116,7 @@
         "minutes": 0
       },
       "shiftEnd": {
-        "hours": 17,
+        "hours": 19,
         "minutes": 0
       },
       "relationships": {
@@ -102,11 +135,11 @@
       "type": "team",
       "index": 102,
       "shiftStart": {
-        "hours": 8,
+        "hours": 9,
         "minutes": 0
       },
       "shiftEnd": {
-        "hours": 17,
+        "hours": 20,
         "minutes": 0
       },
       "relationships": {}

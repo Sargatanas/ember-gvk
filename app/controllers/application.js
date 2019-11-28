@@ -4,7 +4,6 @@ import dateShift from '../utils/date-shift';
 import dateNullable from '../utils/date-nullable';
 
 export default Ember.Controller.extend({
-    hours: [8, 9, 10, 11, 12, 13, 14, 15, 16, 17],
     week: [{
             id: 0,
             rus: 'пн',
@@ -53,11 +52,14 @@ export default Ember.Controller.extend({
     isTasksCreated: false,
     isnotTableTask: false,
     isTableTask: true,
+
+    shiftOptions: '',
+    errors: [],
+    isShowButtons: false,
+    errorsStyle: 'form-header-errors_none',
     
     actions: {
         showTable() {
-            
-
             let newDate = new Date(document.getElementById('add-date').value);
 
             let newDateId = newDate.getDay() - 1;
@@ -102,6 +104,7 @@ export default Ember.Controller.extend({
             let nonSelectedTasks = [];
 
             let store = this.store;
+            let context = this;
             for (let i = 0; i < 7; i++) {                
                 let currentDate = dateShift(i, date);
                 let formDate = dateForm(currentDate);
@@ -112,7 +115,15 @@ export default Ember.Controller.extend({
                         for (let i = 0; i < 7; i++) {
                             dates[i].count = dates[i].date === date ? dates[i].count + 1 : dates[i].count;
                         }
-                        selectedTasks.push(element);  
+                        selectedTasks.push(element);
+                        
+                        let team = element.get('team');
+                        context.setProperties({
+                            shiftOptions: {
+                                start: team.get('shiftStart').hours,
+                                end: team.get('shiftEnd').hours
+                            }
+                        });
                     });                                     
                 });
             }
@@ -131,5 +142,4 @@ export default Ember.Controller.extend({
                 isTasksCreated: true
             });       
         },
-    }
 });
