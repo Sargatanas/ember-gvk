@@ -82,6 +82,10 @@ export default Ember.Controller.extend({
                 isShowButtons: false,
                 isTasksCreated: false,
                 isShowTable: false,
+                errors: {
+                    team: [],
+                    date: []                
+                },
                 errorsStyle: '',
                 currentDateString: ''
             }); 
@@ -91,24 +95,6 @@ export default Ember.Controller.extend({
             let errorElement = {
                 name: '',
                 error: ''
-            }
-
-            if (!teamIndex) {
-                errorElement.name = 'add-team-id';
-                errorElement.content = 'Введите номер бригады';   
-                teamErrors.push(errorElement);
-                errorElement = {
-                    name: '',
-                    error: ''
-                }             
-            } else if (isNaN(teamIndex) || (Number(teamIndex) < 1)) {
-                errorElement.name = 'add-team-id';
-                errorElement.content = 'Номер бригады должен выражаться положительным целым числом';   
-                teamErrors.push(errorElement);
-                errorElement = {
-                    name: '',
-                    error: ''
-                } 
             }
 
             if ((String(date) === 'Invalid Date') || !date || (Number(date) < 0)) {
@@ -128,6 +114,24 @@ export default Ember.Controller.extend({
                         value: date
                     }                    
                 }); 
+            }
+
+            if (!teamIndex) {
+                errorElement.name = 'add-team-id';
+                errorElement.content = 'Введите номер бригады';   
+                teamErrors.push(errorElement);
+                errorElement = {
+                    name: '',
+                    error: ''
+                }             
+            } else if (isNaN(teamIndex) || (Number(teamIndex) < 1)) {
+                errorElement.name = 'add-team-id';
+                errorElement.content = 'Номер бригады должен выражаться положительным целым числом';   
+                teamErrors.push(errorElement);
+                errorElement = {
+                    name: '',
+                    error: ''
+                } 
             }
 
             let context = this;
@@ -163,6 +167,11 @@ export default Ember.Controller.extend({
                 isShowButtons: true,
                 inputTeamId: '101',
                 inputDate: '26.11.2019',
+                errors: {
+                    team: [],
+                    date: []                
+                },
+                errorsStyle: '',
                 date: {
                     id: new Date('2019-11-26').getDay() - 1,
                     value: new Date('2019-11-26')
@@ -228,13 +237,13 @@ export default Ember.Controller.extend({
                                     for (let i = 0; i < 7; i++) {
                                         dates[i].count = dates[i].date === dateForm(taskDate) ? dates[i].count + 1 : dates[i].count;
                         
-                                    let team = task.get('team');
-                                    context.setProperties({
-                                        shiftOptions: {
-                                            start: team.get('shiftStart').hours,
-                                            end: team.get('shiftEnd').hours
-                                        }
-                                    });
+                                        let team = task.get('team');
+                                        context.setProperties({
+                                            shiftOptions: {
+                                                start: team.get('shiftStart').hours,
+                                                end: team.get('shiftEnd').hours
+                                            }
+                                        });
                                     }
                             } 
                         } 

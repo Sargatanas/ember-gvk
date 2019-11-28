@@ -13,7 +13,7 @@
     <header class="form-header">
         <label class="form-header__element" for="team-id">
             Номер бригады:
-            {{input id="add-team-id" enter="validateInputs" value=inputTeamId}}
+            {{input type="number" id="add-team-id" enter="validateInputs" value=inputTeamId}}
         </label>
         {{input-error errors=errors.team}}
         
@@ -21,30 +21,15 @@
             class="form-header__element" 
             for="add-date">
                 Дата (в формате ДД.ММ.ГГГГ):
-                {{input id="add-date" enter="validateInputs" value=inputDate}}
+                {{input type="date" id="add-date" enter="validateInputs" value=inputDate}}
                 {{currentDateString}}
         </label>
         {{input-error errors=errors.date}}
         <div class="form__comment form-comment_inner">
             Для применения новых параметров нажмите enter
-        </div>
-
-        {{!-- {{#if isShowButtons}}
-            {{#if isTasksCreated}}
-                <button 
-                    class="form-header__element form-header__element_button"
-                    {{action "showTable"}}>
-                        Показать таблицу
-                </button>
-            {{else}}
-                <button 
-                    class="form-header__element form-header__element_button"
-                    {{action "createTasks"}}>
-                        Генерировать список заявок
-                </button>
-            {{/if}}  
-        {{/if}}      --}}         
+        </div>         
     </header>
+
     {{#if isShowTable}}
         <main 
             class="form-body" 
