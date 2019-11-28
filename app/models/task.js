@@ -1,5 +1,6 @@
 import DS from 'ember-data';
 import Ember from 'ember';
+import dateString from '../utils/date-string';
 
 export default DS.Model.extend({
   index: DS.attr('number'),
@@ -49,13 +50,11 @@ export default DS.Model.extend({
   }),
 
   time: Ember.computed('timeStart', function() {
-    let time = this.get('timeStart');
-    if (!time) {
-      return '';
-    }
-
     let hours = this.get('timeStart').hours;
     let minutes = this.get('timeStart').minutes;
+    if (!hours || minutes) {
+      return '';
+    }
 
     minutes = minutes < 10 ? '0' + minutes: minutes;
     return `${this.get('timeStart').hours} ч ${minutes} мин`;
@@ -66,14 +65,6 @@ export default DS.Model.extend({
     if (!date) {
       return '';
     }
-
-    date = new Date(date);
-    let fullDate = date.getDate() <= 9 ? '0' + date.getDate() : date.getDate();
-    fullDate += '.';
-    fullDate += (date.getMonth() + 1) <= 9 ? '0' + (date.getMonth() + 1) : (date.getMonth() + 1);
-    fullDate += '.';
-    fullDate += date.getFullYear();
-
-    return fullDate;
+    return dateString(date);
   }),
 });

@@ -23,7 +23,7 @@
       "teamIndex": 101,
       "timeStart": {
         "hours": 9,
-        "minutes": 0
+        "minutes": 20
       },
       "date": "2019-11-28",
       "relationships": {
@@ -37,40 +37,6 @@
     },
     {
       "id": 2,
-      "type": "task",
-      "index": 1043,
-      "importance": 1,
-      "adress": {
-        "street": "Пушкина",
-        "house": 12,
-        "building": "1",
-        "flat": ""
-      },
-      "targets": [
-        "поставить новый смеситель",
-        "прочистить засор в раковине"
-      ],
-      "planeDuration": {
-        "hours": 1,
-        "minutes": 0
-      },
-      "teamIndex": "",
-      "timeStart": {
-        "hours": "",
-        "minutes": ""
-      },
-      "date": "",
-      "relationships": {
-        "team": {
-          "data": {
-            "id": "1",
-            "type": "team"
-          }
-        }
-      }
-    },
-    {
-      "id": 3,
       "type": "task",
       "index": 1054,
       "importance": 2,
@@ -97,6 +63,106 @@
         "team": {
           "data": {
             "id": "2",
+            "type": "team"
+          }
+        }
+      }
+    },
+    {
+      "id": 3,
+      "type": "task",
+      "index": 1043,
+      "importance": 3,
+      "adress": {
+        "street": "Пушкина",
+        "house": 12,
+        "building": "1",
+        "flat": ""
+      },
+      "targets": [
+        "поставить новый смеситель",
+        "прочистить засор в раковине"
+      ],
+      "planeDuration": {
+        "hours": 2,
+        "minutes": 0
+      },
+      "teamIndex": "",
+      "timeStart": {
+        "hours": "",
+        "minutes": ""
+      },
+      "date": "",
+      "relationships": {
+        "team": {
+          "data": {
+            "id": "1",
+            "type": "team"
+          }
+        }
+      }
+    },
+    {
+      "id": 4,
+      "type": "task",
+      "index": 1044,
+      "importance": 1,
+      "adress": {
+        "street": "Пушкина",
+        "house": 12,
+        "building": "1",
+        "flat": ""
+      },
+      "targets": [
+        "вернуться за инструментами"
+      ],
+      "planeDuration": {
+        "hours": 0,
+        "minutes": 30
+      },
+      "teamIndex": "",
+      "timeStart": {
+        "hours": "",
+        "minutes": ""
+      },
+      "date": "",
+      "relationships": {
+        "team": {
+          "data": {
+            "id": "1",
+            "type": "team"
+          }
+        }
+      }
+    },
+    {
+      "id": 5,
+      "type": "task",
+      "index": 1045,
+      "importance": 4,
+      "adress": {
+        "street": "Пушкина",
+        "house": 12,
+        "building": "1",
+        "flat": ""
+      },
+      "targets": [
+        "сделать невозможное"
+      ],
+      "planeDuration": {
+        "hours": 6,
+        "minutes": 0
+      },
+      "teamIndex": "",
+      "timeStart": {
+        "hours": "",
+        "minutes": ""
+      },
+      "date": "",
+      "relationships": {
+        "team": {
+          "data": {
+            "id": "1",
             "type": "team"
           }
         }

@@ -1,9 +1,11 @@
 import Ember from 'ember';
+
 import dateForm from '../utils/date-form';
 import dateShift from '../utils/date-shift';
 import dateNullable from '../utils/date-nullable';
 import dateString from '../utils/date-string';
 import dateStringToForm from '../utils/data-string-to-form';
+import freeTaskList from '../utils/free-task-list';
 
 export default Ember.Controller.extend({
     week: [{
@@ -203,44 +205,53 @@ export default Ember.Controller.extend({
             }); 
             context.setProperties({
                 teamList: currentTeam
-            });
-            
-            for (let i = 0; i < 7; i++) {                
-                let currentDate = dateShift(i, date);
-                let formDate = dateForm(currentDate);
-
-                store.queryRecord('task', { date: formDate, teamIndex: teamIndex }).then((task) => {
-                    task.forEach(function (element) {
-                        let date = element.get('date');
-                        for (let i = 0; i < 7; i++) {
-                            dates[i].count = dates[i].date === date ? dates[i].count + 1 : dates[i].count;
-                        }
-                        selectedTasks.push(element);
-                        
-                        let team = element.get('team');
-                        context.setProperties({
-                            shiftOptions: {
-                                start: team.get('shiftStart').hours,
-                                end: team.get('shiftEnd').hours
-                            }
-                        });
-                    });                                     
-                });
-            }
-
+            });            
+                    
             store.queryRecord('task', { teamIndex: '' }).then(function(task) {
                 task.forEach(function (element) {
-                let id = element.get('id');
-                nonSelectedTasks.push(element);  
+                    nonSelectedTasks.push(element);  
                 });
-                context.setProperties({
-                    isTasksCreated: true,
-                    freeTaskList: nonSelectedTasks,
-                    taskList: selectedTasks,
-                    taskCount: dates
-                });
-                context.showTable();                                  
-            });         
+                let dateStart = dateShift(0, date);
+                let dateEnd = dateShift(6, date);
+                
+                store.findAll('task').then((tasks) => {
+                    tasks.forEach(function (task) {
+                        let taskDate = new Date(task.get('date'));
+
+                        if (taskDate) {
+                            taskDate = dateNullable(taskDate);
+
+                            if ((dateStart.getTime() <= taskDate.getTime()) 
+                                 && (taskDate.getTime() <= dateEnd.getTime()) 
+                                 && (task.get('teamIndex') === Number(context.get('inputTeamId')))) {
+                                    selectedTasks.push(task)
+                                    for (let i = 0; i < 7; i++) {
+                                        dates[i].count = dates[i].date === dateForm(taskDate) ? dates[i].count + 1 : dates[i].count;
+                        
+                                    let team = task.get('team');
+                                    context.setProperties({
+                                        shiftOptions: {
+                                            start: team.get('shiftStart').hours,
+                                            end: team.get('shiftEnd').hours
+                                        }
+                                    });
+                                    }
+                            } 
+                        } 
+                    });
+                    
+                    freeTaskList(nonSelectedTasks);
+
+                    context.setProperties({
+                        isTasksCreated: true,
+                        freeTaskList: nonSelectedTasks,
+                        taskList: selectedTasks,
+                        taskCount: dates
+                    }); 
+
+                    context.showTable();                    
+                });                                
+            });                             
         }); 
     },
 
@@ -262,6 +273,6 @@ export default Ember.Controller.extend({
             this.setProperties({
                 currentDate: this.date.value,                
             });
-        }             
-    },
+        }                     
+    }
 });

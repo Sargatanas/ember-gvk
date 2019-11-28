@@ -4,7 +4,7 @@ export default Ember.Component.extend({
     isOpen: false,
     taskClass: '',
 
-    taskServ: Ember.inject.service('task'),
+    taskServe: Ember.inject.service('task'),
 
     actions: {
         toggleTask() {
@@ -39,7 +39,7 @@ export default Ember.Component.extend({
                 }
             }
 
-            this.get('taskServ').update(team, task, details);
+            this.get('taskServe').update(team, task, details);
         }
     }
 });

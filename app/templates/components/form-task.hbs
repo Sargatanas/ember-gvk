@@ -1,12 +1,17 @@
-{{!-- {{log comment tasks}} --}}
-
-{{#each tasks as |task|}}    
-  <div class="element-body-task {{taskClass}}" {{action "toggleTask" style on='click'}}>    
+{{#each tasks as |task|}} 
+  <div class="element-body-task {{taskClass}}" 
+       {{action "toggleTask" style on='click'}} 
+       style="top: {{getTaskShift task.timeStart}}px;">    
  
     <div class="element-body-task-detail">
       <span class="element-body-task-detail__header">№ заявки:</span>
       {{task.index}}
     </div> 
+
+    <div class="element-body-task-detail">
+      <span class="element-body-task-detail__header">Срочность: </span>
+      {{task.importance}}
+    </div>
 
     <ol class="element-body-task-detail element-body-task-detail_list">
       <li class="element-body-task-detail__header" value="0">Задачи:</li>
@@ -22,17 +27,24 @@
       {{task.fullAdress}}
     </div>
 
+    {{#if task.time}}
+      <div class="element-body-task-detail">
+        <span class="element-body-task-detail__header">Время начала: </span>
+        {{task.time}}
+      </div>
+    {{/if}}    
+
     <div class="element-body-task-detail">
       <span class="element-body-task-detail__header">Предварительная длительность работ: </span>
       {{task.planeTime}}
     </div>
     
-    {{#if free}}
+    {{!-- {{#if free}}
       <button 
         class="form-header__element form-header__element_button form-footer__button"
         {{action "setTask" team '2019-11-29' 8 0}}>
             Присвоить заявку
       </button> 
-    {{/if}}    
+    {{/if}}  --}}   
   </div>
 {{/each}}   
