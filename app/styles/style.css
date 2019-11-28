@@ -139,6 +139,7 @@
     background: rgb(187, 206, 224);
 
     text-align: center;
+    user-select: none;
 }
 .element-body__cell:first-child {
     width: 100px;
@@ -174,6 +175,7 @@
     box-shadow: 5px 5px 10px 0 rgba(0,0,0,0.5);
     
     cursor: pointer;
+    user-select: none;
     transition-duration: 0.3s;
 }
 .element-body-task_resize {

@@ -3,7 +3,7 @@
         Для теста рекомендуется использовать неделю 25.11.2019-1.12.2019 и номера бригад 101-102
         <button 
             class="form-header__element form-header__element_button form-header__element_small-button" 
-            {{action "showDefaulData"}}>
+            {{action "setDefaulData"}}>
                 Заполнить по дефолту
         </button>
     </div>
@@ -34,7 +34,6 @@
                     {{action "showTable"}}>
                         Показать таблицу
                 </button>
-                {{form-task tasks=freeTaskList}}
             {{else}}
                 <button 
                     class="form-header__element form-header__element_button"
@@ -58,12 +57,18 @@
                                  totalTask=(getTotalTask (getDateForm (getDate day.id date.value)) taskCount)}}
                 {{/each}}             
         </main>
-
+    {{/if}}
+    {{#if isTasksCreated}}
         <footer class="form-footer">
+            <button 
+                class="form-header__element form-header__element_button"
+                {{!-- {{action "addTask"}} --}}>
+                    Присвоить заявку
+            </button> 
             <h2 class="form-footer__title">
                 Свободные заявки
             </h2>
-            {{form-task taskClass="element-body-task_not-table" tasks=freeTaskList}}        
-        </footer>
-    {{/if}} 
+            {{form-task taskClass="element-body-task_not-table" comment='Это правильно отрисовывается' tasks=freeTaskList}}
+        </footer> 
+    {{/if}}
 </div>

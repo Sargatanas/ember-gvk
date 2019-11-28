@@ -139,14 +139,16 @@ export default Ember.Controller.extend({
                 task.forEach(function (element) {
                    let id = element.get('id');
                    nonSelectedTasks.push(element);  
+                });
+                context.setProperties({
+                    isTasksCreated: true,
+                    freeTaskList: nonSelectedTasks,
                 });                                  
             });
 
             this.setProperties({
                 taskList: selectedTasks,
-                freeTaskList: nonSelectedTasks,
-                taskCount: dates,
-                isTasksCreated: true
+                taskCount: dates
             });       
         },
 
@@ -225,7 +227,7 @@ export default Ember.Controller.extend({
             }
         },
 
-        showDefaulData() {
+        setDefaulData() {
             this.setProperties({
                 isShowButtons: true,
                 inputTeamId: '101',
