@@ -4,6 +4,8 @@ export default Ember.Component.extend({
     isOpen: false,
     taskClass: '',
 
+    taskServ: Ember.inject.service('task'),
+
     actions: {
         toggleTask() {
             switch (this.get('taskClass')) {
@@ -22,6 +24,22 @@ export default Ember.Component.extend({
                 default:
                     break;
             }
+        },
+
+        setTask(teamList, date, hours, minutes) {
+            let task = this.get('tasks');
+            task = task[0];
+            let team = teamList[0];
+
+            let details = {
+                date: date,
+                timeStart: {
+                    hours: hours,
+                    minutes: minutes
+                }
+            }
+
+            this.get('taskServ').update(team, task, details);
         }
     }
 });

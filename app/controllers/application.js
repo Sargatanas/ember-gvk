@@ -48,8 +48,10 @@ export default Ember.Controller.extend({
     },
     currentDate: '',
 
-    taskList: '',
-    freeTaskList: '',
+    teamList: [],
+    taskList: [],
+    freeTaskList: [],
+
     taskCount: '',
     isTasksCreated: false,
 
@@ -66,92 +68,6 @@ export default Ember.Controller.extend({
     inputDate: '',
     
     actions: {
-        showTable() {
-            let newDate = this.get('date').value;
-
-            let newDateId = newDate.getDay() - 1;
-            newDateId = newDateId === -1 ? 6: newDateId;
-
-            this.setProperties({
-                isShowTable: true,
-                date: {
-                    id: newDateId,
-                    value: newDate
-                }
-            });
-
-            if (this.currentDate === '') {
-                this.setProperties({
-                    currentDate: this.date.value,                
-                });
-            }             
-        },
-
-        createTasks() {
-            this.setProperties({
-                isShowTable: false
-            });
-
-            let teamIndex = this.get('inputTeamId');
-
-            let date = this.get('date').value;
-            date = dateNullable(date);
-            let dates = [];
-
-            for (let i = 0; i < 7; i++) {
-                let currentDate = dateShift(i, date);
-                let formDate = dateForm(currentDate);
-                let content = {};
-                content['date'] = formDate;
-                content['count'] = 0;
-                dates.push(content);
-            }
-
-            let selectedTasks = [];
-            let nonSelectedTasks = [];
-
-            let store = this.store;
-            let context = this;
-            for (let i = 0; i < 7; i++) {                
-                let currentDate = dateShift(i, date);
-                let formDate = dateForm(currentDate);
-
-                store.queryRecord('task', { date: formDate, teamIndex: teamIndex }).then((task) => {
-                    task.forEach(function (element) {
-                        let date = element.get('date');
-                        for (let i = 0; i < 7; i++) {
-                            dates[i].count = dates[i].date === date ? dates[i].count + 1 : dates[i].count;
-                        }
-                        selectedTasks.push(element);
-                        
-                        let team = element.get('team');
-                        context.setProperties({
-                            shiftOptions: {
-                                start: team.get('shiftStart').hours,
-                                end: team.get('shiftEnd').hours
-                            }
-                        });
-                    });                                     
-                });
-            }
-
-            store.queryRecord('task', { teamIndex: '' }).then(function(task) {
-                task.forEach(function (element) {
-                   let id = element.get('id');
-                   nonSelectedTasks.push(element);  
-                });
-                context.setProperties({
-                    isTasksCreated: true,
-                    freeTaskList: nonSelectedTasks,
-                });                                  
-            });
-
-            this.setProperties({
-                taskList: selectedTasks,
-                taskCount: dates
-            });       
-        },
-
         validateInputs() {
             let teamIndex = this.get('inputTeamId');
             
@@ -160,7 +76,6 @@ export default Ember.Controller.extend({
             date = date.match(reg) ? dateStringToForm(date): date;
             date = new Date(date);
 
-       
             this.setProperties({
                 isShowButtons: false,
                 isTasksCreated: false,
@@ -213,30 +128,140 @@ export default Ember.Controller.extend({
                 }); 
             }
 
-            this.setProperties({
-                errors: {
-                    team: teamErrors,
-                    date: dateErrors
+            let context = this;
+            this.store.queryRecord('team', { index: teamIndex }).then((team) => {
+                if (team.length === 0) {
+                    errorElement.name = 'add-team-id';
+                    errorElement.content = 'Бригады с таким номером не существует';   
+                    teamErrors.push(errorElement);
+                    errorElement = {
+                        name: '',
+                        error: ''
+                    }     
                 }
-            });
 
-            if ((dateErrors.length === 0) && (teamErrors.length === 0)) {
                 this.setProperties({
-                    isShowButtons: true
+                    errors: {
+                        team: teamErrors,
+                        date: dateErrors
+                    }
                 });
-            }
+
+                if ((dateErrors.length === 0) && (teamErrors.length === 0)) {
+                    this.setProperties({
+                        isShowButtons: true
+                    });
+                    this.createTask();
+                }
+            });            
         },
 
         setDefaulData() {
             this.setProperties({
                 isShowButtons: true,
                 inputTeamId: '101',
-                inputDate: '28.11.2019',
+                inputDate: '26.11.2019',
                 date: {
-                    id: new Date('2019-11-25').getDay() - 1,
-                    value: new Date('2019-11-25')
+                    id: new Date('2019-11-26').getDay() - 1,
+                    value: new Date('2019-11-26')
                 } 
             });
+            this.createTask();
         }
-    }
+    },
+
+    createTask() {
+        this.setProperties({
+            isShowTable: false
+        });
+
+        let teamIndex = this.get('inputTeamId');
+
+        let date = this.get('date').value;
+        date = dateNullable(date);
+        let dates = [];
+
+        for (let i = 0; i < 7; i++) {
+            let currentDate = dateShift(i, date);
+            let formDate = dateForm(currentDate);
+            let content = {};
+            content['date'] = formDate;
+            content['count'] = 0;
+            dates.push(content);
+        }
+
+        let currentTeam = [];
+        let selectedTasks = [];
+        let nonSelectedTasks = [];
+
+        let store = this.store;
+        let context = this;
+
+        store.queryRecord('team', { index: teamIndex }).then((team) => {
+            team.forEach(function (element) {
+                currentTeam.push(element);
+            }); 
+            context.setProperties({
+                teamList: currentTeam
+            });
+            
+            for (let i = 0; i < 7; i++) {                
+                let currentDate = dateShift(i, date);
+                let formDate = dateForm(currentDate);
+
+                store.queryRecord('task', { date: formDate, teamIndex: teamIndex }).then((task) => {
+                    task.forEach(function (element) {
+                        let date = element.get('date');
+                        for (let i = 0; i < 7; i++) {
+                            dates[i].count = dates[i].date === date ? dates[i].count + 1 : dates[i].count;
+                        }
+                        selectedTasks.push(element);
+                        
+                        let team = element.get('team');
+                        context.setProperties({
+                            shiftOptions: {
+                                start: team.get('shiftStart').hours,
+                                end: team.get('shiftEnd').hours
+                            }
+                        });
+                    });                                     
+                });
+            }
+
+            store.queryRecord('task', { teamIndex: '' }).then(function(task) {
+                task.forEach(function (element) {
+                let id = element.get('id');
+                nonSelectedTasks.push(element);  
+                });
+                context.setProperties({
+                    isTasksCreated: true,
+                    freeTaskList: nonSelectedTasks,
+                    taskList: selectedTasks,
+                    taskCount: dates
+                });
+                context.showTable();                                  
+            });         
+        }); 
+    },
+
+    showTable() {
+        let newDate = this.get('date').value;
+
+        let newDateId = newDate.getDay() - 1;
+        newDateId = newDateId === -1 ? 6: newDateId;
+
+        this.setProperties({
+            isShowTable: true,
+            date: {
+                id: newDateId,
+                value: newDate
+            }
+        });
+
+        if (this.currentDate === '') {
+            this.setProperties({
+                currentDate: this.date.value,                
+            });
+        }             
+    },
 });

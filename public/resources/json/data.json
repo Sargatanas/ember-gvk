@@ -20,14 +20,12 @@
         "hours": 2,
         "minutes": 15
       },
-
       "teamIndex": 101,
       "timeStart": {
         "hours": 9,
         "minutes": 0
       },
       "date": "2019-11-28",
-      
       "relationships": {
         "team": {
           "data": {
@@ -36,7 +34,8 @@
           }
         }
       }
-    }, {
+    },
+    {
       "id": 2,
       "type": "task",
       "index": 1043,
@@ -61,7 +60,6 @@
         "minutes": ""
       },
       "date": "",
-      
       "relationships": {
         "team": {
           "data": {
@@ -70,7 +68,8 @@
           }
         }
       }
-    }, {
+    },
+    {
       "id": 3,
       "type": "task",
       "index": 1054,
@@ -88,14 +87,12 @@
         "hours": 1,
         "minutes": 30
       },
-
       "teamIndex": 102,
       "timeStart": {
         "hours": 12,
         "minutes": 0
       },
       "date": "2019-11-25",
-      
       "relationships": {
         "team": {
           "data": {

@@ -1,11 +1,13 @@
 <div class="form">
     <div class="form__comment">
         Для теста рекомендуется использовать неделю 25.11.2019-1.12.2019 и номера бригад 101-102
-        <button 
-            class="form-header__element form-header__element_button form-header__element_small-button" 
-            {{action "setDefaulData"}}>
-                Заполнить по дефолту
-        </button>
+        {{#if (invertBool isShowButtons)}}
+            <button 
+                class="form-header__element form-header__element_button form-header__element_small-button" 
+                {{action "setDefaulData"}}>
+                    Заполнить по дефолту
+            </button>
+        {{/if}}        
     </div>
 
     <header class="form-header">
@@ -24,10 +26,10 @@
         </label>
         {{input-error errors=errors.date}}
         <div class="form__comment form-comment_inner">
-            По окончании ввода нажмите enter
+            Для применения новых параметров нажмите enter
         </div>
 
-        {{#if isShowButtons}}
+        {{!-- {{#if isShowButtons}}
             {{#if isTasksCreated}}
                 <button 
                     class="form-header__element form-header__element_button"
@@ -41,7 +43,7 @@
                         Генерировать список заявок
                 </button>
             {{/if}}  
-        {{/if}}              
+        {{/if}}      --}}         
     </header>
     {{#if isShowTable}}
         <main 
@@ -60,15 +62,14 @@
     {{/if}}
     {{#if isTasksCreated}}
         <footer class="form-footer">
-            <button 
-                class="form-header__element form-header__element_button"
-                {{!-- {{action "addTask"}} --}}>
-                    Присвоить заявку
-            </button> 
             <h2 class="form-footer__title">
                 Свободные заявки
             </h2>
-            {{form-task taskClass="element-body-task_not-table" comment='Это правильно отрисовывается' tasks=freeTaskList}}
+            {{form-task taskClass="element-body-task_not-table" 
+                        teamId=inputTeamId
+                        tasks=freeTaskList
+                        team=teamList
+                        free='true'}}
         </footer> 
     {{/if}}
 </div>
