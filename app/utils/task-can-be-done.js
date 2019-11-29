@@ -2,6 +2,8 @@ import dateNullable from './date-nullable';
 import dateForm from './date-form';
 
 export default function taskCanBeDone(teams, tasks, date) {
+  tasks = sortTaskList(tasks);
+
   let team = teams[0];
 
   let teamTasks = team.get('tasks');
@@ -44,6 +46,33 @@ export default function taskCanBeDone(teams, tasks, date) {
 
   return tasksPlane;
 }
+
+function sortTaskList(taskList) {
+  let sortTaskList = [];
+
+  taskList.forEach((task, index) => {
+    let duration = task.get('planeDuration');
+    let time = Number(duration.hours) * 60 + Number(duration.minutes);
+
+    sortTaskList.push({
+      index: index,
+      importance: task.get('importance'),
+      time: time
+    });
+  });
+
+  sortTaskList.sort((a, b) => {
+    return b.importance === a.importance ? a.time - b.time : b.importance - a.importance;
+  });
+
+  let newTaskList = [];
+  sortTaskList.forEach(sortTask => {
+    newTaskList.push(taskList[sortTask.index]);
+  });
+
+  return newTaskList;
+}
+
 
 function getLastTask(tasks, date) {
   let lastTask = '';
@@ -91,4 +120,3 @@ function getTaskInfo(task, currentDate, start) {
     end: taskEnd
   }
 }
-

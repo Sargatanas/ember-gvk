@@ -5,7 +5,6 @@ import dateShift from '../utils/date-shift';
 import dateNullable from '../utils/date-nullable';
 import dateString from '../utils/date-string';
 import dateStringToForm from '../utils/data-string-to-form';
-import sortTaskList from '../utils/sort-task-list';
 import taskCanBeDone from '../utils/task-can-be-done';
 
 export default Ember.Controller.extend({
@@ -142,7 +141,7 @@ export default Ember.Controller.extend({
         setDefaulData() {
             this.setProperties({
                 isShowButtons: true,
-                inputTeamId: '101',
+                inputTeamId: '102',
                 inputDate: '2019-11-26',
                 errors: {
                     team: [],
@@ -224,7 +223,6 @@ export default Ember.Controller.extend({
                         } 
                     });
                     
-                    nonSelectedTasks = sortTaskList(nonSelectedTasks);
                     nonSelectedTasks = taskCanBeDone(context.get('teamList'), nonSelectedTasks, context.get('date').value);
 
                     context.setProperties({

@@ -52,7 +52,7 @@ export default DS.Model.extend({
   time: Ember.computed('timeStart', function() {
     let hours = this.get('timeStart').hours;
     let minutes = this.get('timeStart').minutes;
-    if (!hours || !minutes) {
+    if ((hours === '') || (minutes === '')) {
       return '';
     }
 

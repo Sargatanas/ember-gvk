@@ -28,6 +28,7 @@
       {{task.fullAdress}}
     </div>
 
+{{log comment task.timeStart}}
     {{#if task.time}}
       <div class="element-body-task-detail">
         <span class="element-body-task-detail__header">Время начала: </span>
@@ -38,14 +39,6 @@
     <div class="element-body-task-detail">
       <span class="element-body-task-detail__header">Предварительная длительность работ: </span>
       {{task.planeTime}}
-    </div>
-    
-    {{!-- {{#if free}}
-      <button 
-        class="form-header__element form-header__element_button form-footer__button"
-        {{action "setTask" team '2019-11-29' 8 0}}>
-            Присвоить заявку
-      </button> 
-    {{/if}}  --}}   
+    </div>  
   </div>
 {{/each}}   
