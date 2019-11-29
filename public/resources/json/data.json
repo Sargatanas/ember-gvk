@@ -1,5 +1,6 @@
 {
-  "tasks": [{
+  "tasks": [
+    {
       "id": 1,
       "type": "task",
       "index": 1021,
@@ -33,7 +34,8 @@
           }
         }
       }
-    },{
+    },
+    {
       "id": 2,
       "type": "task",
       "index": 1002,
@@ -65,7 +67,8 @@
           }
         }
       }
-    },{
+    },
+    {
       "id": 3,
       "type": "task",
       "index": 1043,
@@ -91,7 +94,8 @@
       },
       "date": "",
       "relationships": {}
-    },{
+    },
+    {
       "id": 4,
       "type": "task",
       "index": 1044,
@@ -116,7 +120,8 @@
       },
       "date": "",
       "relationships": {}
-    },{
+    },
+    {
       "id": 5,
       "type": "task",
       "index": 1001,
@@ -141,7 +146,8 @@
       },
       "date": "",
       "relationships": {}
-    },{
+    },
+    {
       "id": 6,
       "type": "task",
       "index": 100000,
@@ -166,7 +172,8 @@
       },
       "date": "",
       "relationships": {}
-    },{
+    },
+    {
       "id": 7,
       "type": "task",
       "index": 10,
@@ -219,7 +226,8 @@
             {
               "id": "1",
               "type": "task"
-            },{
+            },
+            {
               "id": "2",
               "type": "task"
             }
@@ -241,7 +249,7 @@
       },
       "relationships": {
         "task": {
-          "data": [            
+          "data": [
             {
               "id": "7",
               "type": "task"

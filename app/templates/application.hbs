@@ -7,47 +7,54 @@
             <li>бригада 102, дата 26.11.2019</li>
         </ol>
         {{#if (invertBool isShowButtons)}}
-            <button 
-                class="form-header__element form-header__element_button form-header__element_small-button" 
-                {{action "setDefaulData"}}>
-                    Заполнить по дефолту
-            </button>
-        {{/if}}        
+              <button class="form-header__element form-header__element_button form-header__element_small-button"
+                      {{action "setDefaulData"}}>
+                  Заполнить по дефолту
+              </button>
+        {{/if}}
     </div>
 
     <header class="form-header">
         <label class="form-header__element" for="team-id">
             Номер бригады:
-            {{input type="number" id="add-team-id" enter="validateInputs" value=inputTeamId}}
+            {{input class="form-header__input"
+                    type="number"
+                    id="add-team-id"
+                    enter="validateInputs"
+                    value=inputTeamId}}
         </label>
         {{input-error errors=errors.team}}
-        
-        <label 
-            class="form-header__element" 
+
+        <label
+            class="form-header__element"
             for="add-date">
                 Дата (в формате ДД.ММ.ГГГГ):
-                {{input type="date" id="add-date" enter="validateInputs" value=inputDate}}
+                {{input class="form-header__input"
+                        type="date"
+                        id="add-date"
+                        enter="validateInputs"
+                        value=inputDate}}
                 {{currentDateString}}
         </label>
         {{input-error errors=errors.date}}
         <div class="form__comment form-comment_inner">
             Для применения новых параметров нажмите enter
-        </div>         
+        </div>
     </header>
 
     {{#if isShowTable}}
-        <main 
-            class="form-body" 
+        <main
+            class="form-body"
             id="table">
                 {{#each week as |day|}}
-                    {{table-form hours=hours 
-                                 day=day 
-                                 date=date 
-                                 status=status 
+                    {{table-form hours=hours
+                                 day=day
+                                 date=date
+                                 status=status
                                  taskList=taskList
                                  shiftOptions=teamShiftInfo
                                  totalTask=(getTotalTask (getDateForm (getDate day.id date.value)) taskCount)}}
-                {{/each}}             
+                {{/each}}
         </main>
     {{/if}}
     {{#if isTasksCreated}}
@@ -55,13 +62,11 @@
             <h2 class="form-footer__title">
                 Свободные заявки
             </h2>
-            {{form-task taskClass="element-body-task_not-table" 
+            {{form-task taskClass="element-body-task_not-table"
                         teamId=inputTeamId
                         tasks=freeTaskList
                         team=teamList
                         free='true'}}
         </footer>
-
-        
     {{/if}}
 </div>

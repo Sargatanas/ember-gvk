@@ -2,7 +2,8 @@ import dateNullable from './date-nullable';
 import dateForm from './date-form';
 
 export default function taskCanBeDone(teams, tasks, date) {
-  tasks = sortTaskList(tasks);
+  let taskList = [...tasks];
+  taskList = sortTaskList(taskList);
 
   let team = teams[0];
 
@@ -19,8 +20,7 @@ export default function taskCanBeDone(teams, tasks, date) {
   let isEmptyDay = lastTask ? false : true;
 
   let tasksPlane = [];
-  tasks.forEach(task => {
-
+  taskList.forEach(task => {
     let taskStart = dateNullable(new Date(dateForm(currentDate)));
     taskStart.setHours(lastTask.end.getHours())
     if (!isEmptyDay) {
@@ -29,7 +29,7 @@ export default function taskCanBeDone(teams, tasks, date) {
     taskStart.setMinutes(lastTask.end.getMinutes());
 
     let taskInfo = getTaskInfo(task, currentDate, taskStart);
-    
+
     if (taskInfo.end.getTime() <= shiftEnd.getTime()) {
       lastTask = taskInfo;
       isEmptyDay = false;
@@ -77,20 +77,20 @@ function sortTaskList(taskList) {
 function getLastTask(tasks, date) {
   let lastTask = '';
 
-  tasks.forEach(task => {
+  tasks.forEach((task) => {
     let taskDate = new Date(task.get('date'));
     taskDate = dateNullable(taskDate);
 
     if (taskDate.getTime() === date.getTime()) {
       lastTask = lastTask === '' ? task : lastTask;
-    
-      let lastTime = lastTask.get('timeStart').hours*60 + lastTask.get('timeStart').minutes;
-      let currentTime = task.get('timeStart').hours*60 + task.get('timeStart').minutes;
+
+      let lastTime = lastTask.get('timeStart').hours * 60 + lastTask.get('timeStart').minutes;
+      let currentTime = task.get('timeStart').hours * 60 + task.get('timeStart').minutes;
 
       lastTask = currentTime > lastTime ? task : lastTask;
-    }  
-  });  
-  
+    }
+  });
+
   return lastTask;
 }
 
@@ -102,16 +102,16 @@ function getTaskInfo(task, currentDate, start) {
   let taskDuration = task ? task.get('planeDuration') : durationDefault;
 
   let taskStart = '';
-    if (start) {
+  if (start) {
     taskStart = start;
   } else {
     taskStart = new Date(currentDate);
     taskStart.setHours(task.get('timeStart').hours);
     taskStart.setMinutes(task.get('timeStart').minutes);
-  }  
+  }
 
   let taskEnd = new Date(currentDate);
-  taskEnd.setHours(taskStart.getHours()+ taskDuration.hours);
+  taskEnd.setHours(taskStart.getHours() + taskDuration.hours);
   taskEnd.setMinutes(taskStart.getMinutes() + taskDuration.minutes);
 
   return {

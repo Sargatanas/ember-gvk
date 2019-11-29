@@ -1,4 +1,4 @@
-<div class="form-body__element {{comparisonDates (getDate date.id date.value)(getDate day.id date.value)}}">
+<div class="form-body__element {{comparisonDates (getDate date.id date.value) (getDate day.id date.value)}}">
     <div class="element-header">
         <div class="element-header__cell element-header__cell_day">
             {{toUpperCase day.rus}}
@@ -7,9 +7,9 @@
             {{getDateString day.id date.value}}
         </div>
         <div class="element-header__cell element-header__cell_total-tasks">
-            Всего задач: 
-            <span 
-                id='total-tasks-{{day.en}}' 
+            Всего задач:
+            <span
+                id='total-tasks-{{day.en}}'
                 class="element-header__cell-content element-header__cell-content_{{day.en}}">
                 {{totalTask}}
             </span>
@@ -17,7 +17,7 @@
     </div>
     {{#if (isTotalCountEmpty totalTask)}}
         <table
-            class="element-body" 
+            class="element-body"
             id="table-content">
             <tr class="element-body__row">
                 <th class="element-body__cell">
@@ -28,13 +28,13 @@
                 </th>
             </tr>
             {{#each (getShiftBorders shiftOptions) as |hour|}}
-                {{table-row hour=hour 
-                            date=(getDate day.id date.value) 
+                {{table-row hour=hour
+                            date=(getDate day.id date.value)
                             currentDate=(getDateForm (getDate day.id date.value))
                             taskList=taskList
                             dayId=day.id
                             endHour=shiftOptions.end}}
-            {{/each}}        
+            {{/each}}
         </table>
     {{/if}}
 </div>

@@ -9,13 +9,13 @@ import taskCanBeDone from '../utils/task-can-be-done';
 
 export default Ember.Controller.extend({
     week: [
-        {id: 0, rus: 'пн', en: 'mon'},
-        {id: 1, rus: 'вт', en: 'tue'},
-        {id: 2, rus: 'ср', en: 'wed'},
-        {id: 3, rus: 'чт', en: 'thu'},
-        {id: 4, rus: 'пт', en: 'fri'},
-        {id: 5, rus: 'сб', en: 'sat'},
-        {id: 6, rus: 'вс', en: 'sun'}
+        { id: 0, rus: 'пн', en: 'mon' },
+        { id: 1, rus: 'вт', en: 'tue' },
+        { id: 2, rus: 'ср', en: 'wed' },
+        { id: 3, rus: 'чт', en: 'thu' },
+        { id: 4, rus: 'пт', en: 'fri' },
+        { id: 5, rus: 'сб', en: 'sat' },
+        { id: 6, rus: 'вс', en: 'sun' }
     ],
 
     date: {
@@ -44,14 +44,14 @@ export default Ember.Controller.extend({
 
     inputTeamId: '',
     inputDate: '',
-    
+
     actions: {
         validateInputs() {
             let teamIndex = this.get('inputTeamId');
-            
+
             let date = this.get('inputDate');
             let reg = /\d\d[.]\d\d[.]\d\d\d\d$/;
-            date = date.match(reg) ? dateStringToForm(date): date;
+            date = date.match(reg) ? dateStringToForm(date) : date;
             date = dateNullable(new Date(date));
 
             this.setProperties({
@@ -60,27 +60,31 @@ export default Ember.Controller.extend({
                 isShowTable: false,
                 errors: {
                     team: [],
-                    date: []                
+                    date: []
                 },
                 errorsStyle: '',
                 currentDateString: ''
-            }); 
+            });
 
             let teamErrors = [];
             let dateErrors = [];
             let errorElement = {
                 name: '',
-                error: ''
+                error: '',
+                clear() {
+                  this.name = '';
+                  this.error = ''
+                }
             };
 
-            if ((String(date) === 'Invalid Date') || !date || (Number(date) < 0)) {
+            if ((String(date) === 'Invalid Date') || (!date) || (Number(date) < 0)) {
                 errorElement.name = 'add-date';
                 errorElement.content = 'Введите корректную дату';
                 dateErrors.push(errorElement);
                 errorElement = {
                     name: '',
                     error: ''
-                };   
+                };
             } else {
                 date = new Date(date);
                 this.setProperties({
@@ -88,38 +92,38 @@ export default Ember.Controller.extend({
                     date: {
                         id: date.getDay() - 1,
                         value: date
-                    }                    
-                }); 
+                    }
+                });
             }
 
             if (!teamIndex) {
                 errorElement.name = 'add-team-id';
-                errorElement.content = 'Введите номер бригады';   
+                errorElement.content = 'Введите номер бригады';
                 teamErrors.push(errorElement);
                 errorElement = {
                     name: '',
                     error: ''
-                };            
+                };
             } else if (isNaN(teamIndex) || (Number(teamIndex) < 1)) {
                 errorElement.name = 'add-team-id';
-                errorElement.content = 'Номер бригады должен выражаться положительным целым числом';   
+                errorElement.content = 'Номер бригады должен выражаться положительным целым числом';
                 teamErrors.push(errorElement);
                 errorElement = {
                     name: '',
                     error: ''
-                }; 
+                };
             }
 
             let context = this;
             this.store.queryRecord('team', { index: teamIndex }).then((team) => {
-                if (team.length === 0) {
+                if ((team.length === 0) && (teamIndex) && (teamIndex > 0)) {
                     errorElement.name = 'add-team-id';
-                    errorElement.content = 'Бригады с таким номером не существует';   
+                    errorElement.content = 'Бригады с таким номером не существует';
                     teamErrors.push(errorElement);
                     errorElement = {
                         name: '',
                         error: ''
-                    };     
+                    };
                 }
 
                 this.setProperties({
@@ -135,23 +139,23 @@ export default Ember.Controller.extend({
                     });
                     this.createTask();
                 }
-            });            
+            });
         },
 
         setDefaulData() {
             this.setProperties({
                 isShowButtons: true,
-                inputTeamId: '102',
+                inputTeamId: '101',
                 inputDate: '2019-11-26',
                 errors: {
                     team: [],
-                    date: []                
+                    date: []
                 },
                 errorsStyle: '',
                 date: {
                     id: new Date('2019-11-26').getDay() - 1,
                     value: dateNullable(new Date('2019-11-26'))
-                } 
+                }
             });
             this.createTask();
         }
@@ -187,18 +191,18 @@ export default Ember.Controller.extend({
         store.queryRecord('team', { index: teamIndex }).then((team) => {
             team.forEach(function (element) {
                 currentTeam.push(element);
-            }); 
+            });
             context.setProperties({
                 teamList: currentTeam
-            });            
-                    
-            store.queryRecord('task', { teamIndex: '' }).then(function(task) {
+            });
+
+            store.queryRecord('task', { teamIndex: '' }).then((task) => {
                 task.forEach(function (element) {
-                    nonSelectedTasks.push(element);  
+                    nonSelectedTasks.push(element);
                 });
                 let dateStart = dateShift(0, date);
                 let dateEnd = dateShift(6, date);
-                
+
                 store.findAll('task').then((tasks) => {
                     tasks.forEach(function (task) {
                         let taskDate = new Date(task.get('date'));
@@ -207,22 +211,22 @@ export default Ember.Controller.extend({
                             taskDate = dateNullable(taskDate);
 
                             if ((dateStart.getTime() <= taskDate.getTime()) && (taskDate.getTime() <= dateEnd.getTime()) && (task.get('teamIndex') === Number(context.get('inputTeamId')))) {
-                                    selectedTasks.push(task);
-                                    for (let i = 0; i < 7; i++) {
-                                        dates[i].count = dates[i].date === dateForm(taskDate) ? dates[i].count + 1 : dates[i].count;
-                        
-                                        let team = task.get('team');
-                                        context.setProperties({
-                                            teamShiftInfo: {
-                                                start: team.get('shiftStart').hours,
-                                                end: team.get('shiftEnd').hours
-                                            }
-                                        });
-                                    }
-                            } 
-                        } 
+                                selectedTasks.push(task);
+                                for (let i = 0; i < 7; i++) {
+                                    dates[i].count = dates[i].date === dateForm(taskDate) ? dates[i].count + 1 : dates[i].count;
+
+                                    let team = task.get('team');
+                                    context.setProperties({
+                                        teamShiftInfo: {
+                                            start: team.get('shiftStart').hours,
+                                            end: team.get('shiftEnd').hours
+                                        }
+                                    });
+                                }
+                            }
+                        }
                     });
-                    
+
                     nonSelectedTasks = taskCanBeDone(context.get('teamList'), nonSelectedTasks, context.get('date').value);
 
                     context.setProperties({
@@ -230,19 +234,19 @@ export default Ember.Controller.extend({
                         freeTaskList: nonSelectedTasks,
                         taskList: selectedTasks,
                         taskCount: dates
-                    }); 
+                    });
 
-                    context.showTable();                    
-                });                                
-            });                             
-        }); 
+                    context.showTable();
+                });
+            });
+        });
     },
 
     showTable() {
         let newDate = this.get('date').value;
 
         let newDateId = newDate.getDay() - 1;
-        newDateId = newDateId === -1 ? 6: newDateId;
+        newDateId = newDateId === -1 ? 6 : newDateId;
 
         this.setProperties({
             isShowTable: true,
@@ -254,8 +258,8 @@ export default Ember.Controller.extend({
 
         if (this.currentDate === '') {
             this.setProperties({
-                currentDate: this.date.value,                
+                currentDate: this.date.value,
             });
-        }                     
+        }
     }
 });
