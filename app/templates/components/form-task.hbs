@@ -1,7 +1,8 @@
 {{#each tasks as |task|}} 
   <div class="element-body-task {{taskClass}}" 
        {{action "toggleTask" style on='click'}} 
-       style="top: {{getTaskShift task.timeStart}}px;">    
+       style="top: {{getTaskShift task.timeStart}}px;
+              z-index: {{getZIndex currentHour endHour dayId}}">    
  
     <div class="element-body-task-detail">
       <span class="element-body-task-detail__header">№ заявки:</span>

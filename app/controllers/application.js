@@ -9,63 +9,39 @@ import sortTaskList from '../utils/sort-task-list';
 import taskCanBeDone from '../utils/task-can-be-done';
 
 export default Ember.Controller.extend({
-    week: [{
-            id: 0,
-            rus: 'пн',
-            en: 'mon'
-        },{
-            id: 1,
-            rus: 'вт',
-            en: 'tue'
-        },{
-            id: 2,
-            rus: 'ср',
-            en: 'wed'
-        },{
-            id: 3,
-            rus: 'чт',
-            en: 'thu'
-        },{
-            id: 4,
-            rus: 'пт',
-            en: 'fri'
-        },{
-            id: 5,
-            rus: 'сб',
-            en: 'sat'
-        },{
-            id: 6,
-            rus: 'вс',
-            en: 'sun'
-        }
+    week: [
+        {id: 0, rus: 'пн', en: 'mon'},
+        {id: 1, rus: 'вт', en: 'tue'},
+        {id: 2, rus: 'ср', en: 'wed'},
+        {id: 3, rus: 'чт', en: 'thu'},
+        {id: 4, rus: 'пт', en: 'fri'},
+        {id: 5, rus: 'сб', en: 'sat'},
+        {id: 6, rus: 'вс', en: 'sun'}
     ],
-
-    isShowTable: false,
-    
-    isShowTasks: false,
-    currentTeam: '',
 
     date: {
         id: new Date().getDay() - 1,
         value: new Date(),
     },
-    currentDate: '',
 
     teamList: [],
+    teamShiftInfo: '',
+
     taskList: [],
+    taskCount: '',
+
     freeTaskList: [],
 
-    taskCount: '',
     isTasksCreated: false,
+    isShowTable: false,
 
-    shiftOptions: '',
     errors: {
         team: [],
         date: []
     },
+    errorsStyle: 'form-header-errors_none',
     currentDateString: '',
     isShowButtons: false,
-    errorsStyle: 'form-header-errors_none',
 
     inputTeamId: '',
     inputDate: '',
@@ -96,7 +72,7 @@ export default Ember.Controller.extend({
             let errorElement = {
                 name: '',
                 error: ''
-            }
+            };
 
             if ((String(date) === 'Invalid Date') || !date || (Number(date) < 0)) {
                 errorElement.name = 'add-date';
@@ -105,7 +81,7 @@ export default Ember.Controller.extend({
                 errorElement = {
                     name: '',
                     error: ''
-                }   
+                };   
             } else {
                 date = new Date(date);
                 this.setProperties({
@@ -124,7 +100,7 @@ export default Ember.Controller.extend({
                 errorElement = {
                     name: '',
                     error: ''
-                }             
+                };            
             } else if (isNaN(teamIndex) || (Number(teamIndex) < 1)) {
                 errorElement.name = 'add-team-id';
                 errorElement.content = 'Номер бригады должен выражаться положительным целым числом';   
@@ -132,7 +108,7 @@ export default Ember.Controller.extend({
                 errorElement = {
                     name: '',
                     error: ''
-                } 
+                }; 
             }
 
             let context = this;
@@ -144,7 +120,7 @@ export default Ember.Controller.extend({
                     errorElement = {
                         name: '',
                         error: ''
-                    }     
+                    };     
                 }
 
                 this.setProperties({
@@ -231,16 +207,14 @@ export default Ember.Controller.extend({
                         if (taskDate) {
                             taskDate = dateNullable(taskDate);
 
-                            if ((dateStart.getTime() <= taskDate.getTime()) 
-                                 && (taskDate.getTime() <= dateEnd.getTime()) 
-                                 && (task.get('teamIndex') === Number(context.get('inputTeamId')))) {
-                                    selectedTasks.push(task)
+                            if ((dateStart.getTime() <= taskDate.getTime()) && (taskDate.getTime() <= dateEnd.getTime()) && (task.get('teamIndex') === Number(context.get('inputTeamId')))) {
+                                    selectedTasks.push(task);
                                     for (let i = 0; i < 7; i++) {
                                         dates[i].count = dates[i].date === dateForm(taskDate) ? dates[i].count + 1 : dates[i].count;
                         
                                         let team = task.get('team');
                                         context.setProperties({
-                                            shiftOptions: {
+                                            teamShiftInfo: {
                                                 start: team.get('shiftStart').hours,
                                                 end: team.get('shiftEnd').hours
                                             }

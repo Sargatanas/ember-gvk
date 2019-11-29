@@ -32,7 +32,8 @@
                             date=(getDate day.id date.value) 
                             currentDate=(getDateForm (getDate day.id date.value))
                             taskList=taskList
-                            day=day.en}}
+                            dayId=day.id
+                            endHour=shiftOptions.end}}
             {{/each}}        
         </table>
     {{/if}}

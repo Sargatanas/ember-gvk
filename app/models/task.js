@@ -52,12 +52,12 @@ export default DS.Model.extend({
   time: Ember.computed('timeStart', function() {
     let hours = this.get('timeStart').hours;
     let minutes = this.get('timeStart').minutes;
-    if (!hours || minutes) {
+    if (!hours || !minutes) {
       return '';
     }
 
     minutes = minutes < 10 ? '0' + minutes: minutes;
-    return `${this.get('timeStart').hours} ч ${minutes} мин`;
+    return `${hours}:${minutes}`;
   }),
 
   stringDate: Ember.computed('date', function() {

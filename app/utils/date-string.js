@@ -1,4 +1,4 @@
-import dateForm from '../utils/date-form';
+import dateForm from './date-form';
 
 export default function dateString(date) {
   let currentDate = new Date(dateForm(date));

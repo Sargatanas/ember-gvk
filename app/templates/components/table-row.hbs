@@ -6,6 +6,9 @@
         {{#each taskList as |task|}}
             {{form-task comment='Это выбранные'
                         taskClass="element-body-task_resize"
+                        dayId=dayId
+                        endHour=endHour
+                        currentHour=hour
                         tasks=(getTask task 
                                        task.date
                                        currentDate  

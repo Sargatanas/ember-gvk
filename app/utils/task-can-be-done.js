@@ -1,5 +1,5 @@
-import dateNullable from '../utils/date-nullable';
-import dateForm from '../utils/date-form';
+import dateNullable from './date-nullable';
+import dateForm from './date-form';
 
 export default function taskCanBeDone(teams, tasks, date) {
   let team = teams[0];
