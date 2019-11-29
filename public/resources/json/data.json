@@ -1,6 +1,5 @@
 {
-  "tasks": [
-    {
+  "tasks": [{
       "id": 1,
       "type": "task",
       "index": 1021,
@@ -20,7 +19,7 @@
         "hours": 2,
         "minutes": 15
       },
-      "teamIndex": 102,
+      "teamIndex": 101,
       "timeStart": {
         "hours": 9,
         "minutes": 20
@@ -29,16 +28,15 @@
       "relationships": {
         "team": {
           "data": {
-            "id": "2",
+            "id": "1",
             "type": "team"
           }
         }
       }
-    },
-    {
+    },{
       "id": 2,
       "type": "task",
-      "index": 1054,
+      "index": 1002,
       "importance": 2,
       "adress": {
         "street": "Ленина",
@@ -56,9 +54,9 @@
       "teamIndex": 101,
       "timeStart": {
         "hours": 12,
-        "minutes": 0
+        "minutes": 35
       },
-      "date": "2019-11-25",
+      "date": "2019-11-28",
       "relationships": {
         "team": {
           "data": {
@@ -67,8 +65,7 @@
           }
         }
       }
-    },
-    {
+    },{
       "id": 3,
       "type": "task",
       "index": 1043,
@@ -94,8 +91,7 @@
       },
       "date": "",
       "relationships": {}
-    },
-    {
+    },{
       "id": 4,
       "type": "task",
       "index": 1044,
@@ -120,11 +116,10 @@
       },
       "date": "",
       "relationships": {}
-    },
-    {
+    },{
       "id": 5,
       "type": "task",
-      "index": 1045,
+      "index": 1001,
       "importance": 4,
       "adress": {
         "street": "Пушкина",
@@ -136,8 +131,8 @@
         "сделать невозможное"
       ],
       "planeDuration": {
-        "hours": 6,
-        "minutes": 0
+        "hours": 3,
+        "minutes": 55
       },
       "teamIndex": "",
       "timeStart": {
@@ -146,8 +141,7 @@
       },
       "date": "",
       "relationships": {}
-    },
-    {
+    },{
       "id": 6,
       "type": "task",
       "index": 100000,
@@ -172,6 +166,38 @@
       },
       "date": "",
       "relationships": {}
+    },{
+      "id": 7,
+      "type": "task",
+      "index": 10,
+      "importance": 4,
+      "adress": {
+        "street": "Пушкина",
+        "house": 12,
+        "building": "1",
+        "flat": ""
+      },
+      "targets": [
+        "поразмышлять о смысле жизни"
+      ],
+      "planeDuration": {
+        "hours": 2,
+        "minutes": 0
+      },
+      "teamIndex": 102,
+      "timeStart": {
+        "hours": 9,
+        "minutes": 0
+      },
+      "date": "2019-11-26",
+      "relationships": {
+        "team": {
+          "data": {
+            "id": "2",
+            "type": "team"
+          }
+        }
+      }
     }
   ],
   "teams": [
@@ -191,6 +217,9 @@
         "task": {
           "data": [
             {
+              "id": "1",
+              "type": "task"
+            },{
               "id": "2",
               "type": "task"
             }
@@ -212,9 +241,9 @@
       },
       "relationships": {
         "task": {
-          "data": [
+          "data": [            
             {
-              "id": "1",
+              "id": "7",
               "type": "task"
             }
           ]
