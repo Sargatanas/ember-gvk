@@ -77,7 +77,7 @@ export default Ember.Controller.extend({
             let date = this.get('inputDate');
             let reg = /\d\d[.]\d\d[.]\d\d\d\d$/;
             date = date.match(reg) ? dateStringToForm(date): date;
-            date = new Date(date);
+            date = dateNullable(new Date(date));
 
             this.setProperties({
                 isShowButtons: false,
@@ -175,7 +175,7 @@ export default Ember.Controller.extend({
                 errorsStyle: '',
                 date: {
                     id: new Date('2019-11-26').getDay() - 1,
-                    value: new Date('2019-11-26')
+                    value: dateNullable(new Date('2019-11-26'))
                 } 
             });
             this.createTask();
@@ -189,7 +189,7 @@ export default Ember.Controller.extend({
 
         let teamIndex = this.get('inputTeamId');
 
-        let date = this.get('date').value;
+        let date = dateNullable(this.get('date').value);
         date = dateNullable(date);
         let dates = [];
 
@@ -251,7 +251,7 @@ export default Ember.Controller.extend({
                     });
                     
                     nonSelectedTasks = sortTaskList(nonSelectedTasks);
-                    taskCanBeDone(context.get('teamList'), nonSelectedTasks);
+                    nonSelectedTasks = taskCanBeDone(context.get('teamList'), nonSelectedTasks, context.get('date').value);
 
                     context.setProperties({
                         isTasksCreated: true,
@@ -276,7 +276,7 @@ export default Ember.Controller.extend({
             isShowTable: true,
             date: {
                 id: newDateId,
-                value: newDate
+                value: dateNullable(newDate)
             }
         });
 

@@ -9,11 +9,12 @@
 }
 .form__comment {
     display: flex;
-    align-items: center;
+    flex-direction: column;
+    justify-content: center;
 
-    height: 30px;
+    margin: 15px 0;
+    padding: 10px 10px 0 20px;
 
-    padding: 10px 10px 10px 20px;
     color: rgb(153, 153, 153);
 }
 .form-comment_inner {
@@ -52,7 +53,6 @@
     cursor: pointer;
 }
 .form-header__element_small-button {
-    margin-left: 15px;
     text-transform: lowercase;
 }
 .form-header-errors {
